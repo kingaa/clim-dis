@@ -1,8 +1,6 @@
 ### ICTP Climate and Disease Workshop
-#### [Course Notes](http://kingaa.github.io/clim-dis/)
 
 ----------------------------
-
 
 These are notes for workshop activities led by Aaron King as part of the ICTP Workshop on Mathematical Models of Climate Variability, Environmental Change and Infectious Diseases.
 They draw in large part on the notes from a [SISMID course](http://kingaa.github.io/sbied) and from a course taught as part of the [ICTP Spring College](http://kingaa.github.io/clim-dis).
@@ -47,6 +45,7 @@ The **pomp** package is described and illustrated in
 
 ----------------------------
 
+### License
 
 ![CC-BY-NC](https://i.creativecommons.org/l/by-nc/4.0/88x31.png)
 
