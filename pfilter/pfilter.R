@@ -151,7 +151,7 @@ set.seed(1221234211)
 #' Let's reconstruct the toy SIR model we were working with.
 #' 
 ## ----flu-construct-------------------------------------------------------
-read.table("http://kingaa.github.io/short-course/stochsim/bsflu_data.txt") -> bsflu
+read.table("http://kingaa.github.io/clim-dis/stochsim/bsflu_data.txt") -> bsflu
 
 rproc <- Csnippet("
   double N = 763;
@@ -622,7 +622,7 @@ ggplot(data=sims,mapping=aes(x=time,y=B,group=sim,color=sim=="data"))+
 #' --------------------------
 #' 
 #' ## [Back to course homepage](http://kingaa.github.io/short-course)
-#' ## [**R** codes for this document](http://raw.githubusercontent.com/kingaa/short-course/master/pfilter/pfilter.R)
+#' ## [**R** codes for this document](http://raw.githubusercontent.com/kingaa/clim-dis/master/pfilter/pfilter.R)
 #' 
 #' --------------------------
 #' 

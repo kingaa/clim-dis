@@ -1,13 +1,52 @@
-### Model-based Inference in Ecology and Epidemiology
-#### [Course Notes](http://kingaa.github.io/short-course/)
-
-These are notes for a short course given by Aaron King as part of the Summer College of the International Centre for Theoretical Physics.
-They draw in large part on the notes for the [SISMID course](http://kingaa.github.io/sbied).
-From the [main page](http://kingaa.github.io/short-course/), links lead to pages on a number of specific topics, culminating in four case studies that exemplify the methods and raise key issues.
-For each such page, there is a corresponding **R** script, which contains the codes needed to recapitulate the calculations.
-This script is a starting point for students to follow, explore, and modify the analysis according to their own curiosity and interest.
+### ICTP Climate and Disease Workshop
+#### [Course Notes](http://kingaa.github.io/clim-dis/)
 
 ----------------------------
+
+
+These are notes for workshop activities led by Aaron King as part of the ICTP Workshop on Mathematical Models of Climate Variability, Environmental Change and Infectious Diseases.
+They draw in large part on the notes from a [SISMID course](http://kingaa.github.io/sbied) and from a course taught as part of the [ICTP Spring College](http://kingaa.github.io/clim-dis).
+
+----------------------------
+
+### Preparing for the workshop
+
+1. Complete the [**R** tutorial](http://kingaa.github.io/R_Tutorial) before the beginning of the course.
+1. If you wish to use your own computer, install **R** and **RStudio** on it before the first day of the course.
+[Instructions for doing so are here](./prep/preparation.html).
+
+
+----------------------------
+
+### Readings
+
+The following papers serve as background for some of the central issues:
+
+- S. N. Wood (2010) Statistical inference for noisy nonlinear ecological dynamic systems. *Nature*, **466**:&nbsp;1102--1104. [DOI:&nbsp;10.1038/nature09319](http://dx.doi.org/10.1038/nature09319).
+- A. A. King, E. L. Ionides, M. Pascual, and M. J. Bouma (2008) Inapparent infections and cholera dynamics. *Nature*, **454**:&nbsp;877--880. [DOI:&nbsp;10.1038/nature07084](http://dx.doi.org/10.1038/nature07084)
+- S. Shrestha, A. A. King, and P. Rohani (2011) Statistical Inference for Multi-Pathogen Systems. *PLoS&nbsp;Comput.&nbsp;Biol.*, **7**:&nbsp;e1002135. [DOI:&nbsp;10.1371/journal.pcbi.1002135](http://dx.doi.org/10.1371/journal.pcbi.1002135)
+
+A good reference for modeling in infectious disease epidemiology is:
+
+- Keeling, M. & Rohani, P. *Modeling infectious diseases in humans and animals*. Princeton University Press, 2008.
+
+The **pomp** package is described and illustrated in
+
+- A. A. King, D. Nguyen, and E. L. Ionides (2016) Statistical Inference for Partially Observed Markov Processes via the R Package pomp. *J.&nbsp;Stat.&nbsp;Soft.*, **69**:&nbsp;1--43. [DOI:&nbsp;10.18637/jss.v069.i12](http://dx.doi.org/10.18637/jss.v069.i12)
+
+
+----------------------------
+
+### Links
+
+- [**R** Tutorial](http://kingaa.github.io/R_Tutorial)  
+- [Tutorial on data munging with `plyr`, `reshape2`, and `magrittr`](http://kingaa.github.io/clim-dis/hadley/munging.html)  
+- [Tutorial on `ggplot2`](http://kingaa.github.io/clim-dis/hadley/viz.html)  
+- [Source code for these notes](http://github.com/kingaa/clim-dis/)  
+- [**pomp** homepage](http://kingaa.github.io/pomp)  
+
+----------------------------
+
 
 ![CC-BY-NC](https://i.creativecommons.org/l/by-nc/4.0/88x31.png)
 

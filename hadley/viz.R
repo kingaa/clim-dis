@@ -26,7 +26,7 @@ theme_set(theme_bw())
 #' Run the codes shown and study the outputs to learn about these tools.
 #' When questions are posed, do your best to answer them.
 #' 
-#' For your convenience, [the **R** codes for this document are provided in an **R** script](http://raw.githubusercontent.com/kingaa/short-course/master/hadley/viz.R) which you can download, edit, and run.
+#' For your convenience, [the **R** codes for this document are provided in an **R** script](http://raw.githubusercontent.com/kingaa/clim-dis/master/hadley/viz.R) which you can download, edit, and run.
 #' 
 #' ## Getting started: **R**'s base graphics
 #' 
@@ -35,7 +35,7 @@ theme_set(theme_bw())
 #' Let's load the data on transgenic mosquito survival time.
 #' 
 ## ------------------------------------------------------------------------
-dat <- read.csv("http://kingaa.github.io/short-course/hadley/mosquitoes.csv")
+dat <- read.csv("http://kingaa.github.io/clim-dis/hadley/mosquitoes.csv")
 
 #' 
 #' Let's compare the average lifespan of transgenic vs wildtype mosquitoes from this experiment.
@@ -81,7 +81,7 @@ plot(brain~body,data=mammals,log='xy')
 #' ### Oil production
 #' 
 ## ------------------------------------------------------------------------
-read.csv("http://kingaa.github.io/short-course/hadley/oil_production.csv",
+read.csv("http://kingaa.github.io/clim-dis/hadley/oil_production.csv",
          comment.char="#") -> oil
 head(oil)
 summary(oil)
@@ -124,7 +124,7 @@ plot(wideOil$year,wideOil$total,type='l')
 #' ### Energy production
 #' 
 ## ------------------------------------------------------------------------
-read.csv("http://kingaa.github.io/short-course/hadley/energy_production.csv",
+read.csv("http://kingaa.github.io/clim-dis/hadley/energy_production.csv",
          comment.char="#") -> energy
 
 library(ggplot2)
@@ -224,6 +224,6 @@ ggplot(data=x,mapping=aes(x=year,y=TJ,fill=source1))+
 #' --------------------------
 #' 
 #' ## [Back to course homepage](http://kingaa.github.io/short-course)
-#' ## [**R** codes for this document](http://raw.githubusercontent.com/kingaa/short-course/master/hadley/viz.R)
+#' ## [**R** codes for this document](http://raw.githubusercontent.com/kingaa/clim-dis/master/hadley/viz.R)
 #' 
 #' --------------------------

@@ -14,7 +14,7 @@
 #' 
 #' This is an extremely condensed introduction to the powerful data-munging tools developed by Hadley Wickham and contained in the packages **plyr**, **reshape2**, and **magrittr**.
 #' Run the codes shown and study the outputs to learn about these tools.
-#' For your convenience, the [**R** codes for this document are provided in a script](http://raw.githubusercontent.com/kingaa/short-course/master/hadley/viz.R) which you can download, edit, and run.
+#' For your convenience, the [**R** codes for this document are provided in a script](http://raw.githubusercontent.com/kingaa/clim-dis/master/hadley/viz.R) which you can download, edit, and run.
 #' 
 #' ## Reshaping data with **reshape2**
 #' 
@@ -77,7 +77,7 @@ arrange(x,c,b,a)
 
 #' 
 ## ------------------------------------------------------------------------
-read.csv("http://kingaa.github.io/short-course/hadley/energy_production.csv",comment="#") -> energy
+read.csv("http://kingaa.github.io/clim-dis/hadley/energy_production.csv",comment="#") -> energy
 arrange(energy,region,source,year)
 arrange(energy,-TJ,year)
 
@@ -291,7 +291,7 @@ energy %>%
 #' --------------------------
 #' 
 #' ## [Back to course homepage](http://kingaa.github.io/short-course)
-#' ## [**R** codes for this document](http://raw.githubusercontent.com/kingaa/short-course/master/hadley/viz.R)
+#' ## [**R** codes for this document](http://raw.githubusercontent.com/kingaa/clim-dis/master/hadley/viz.R)
 #' 
 #' --------------------------
 #' 

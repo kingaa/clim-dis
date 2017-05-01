@@ -1,6 +1,6 @@
 MODULES = prep intro stochsim parest pfilter mif polio measles salix hadley
 
-default: index.html modules
+default: modules
 
 modules:
 	for module in $(MODULES); do ($(MAKE) -C $$module); done

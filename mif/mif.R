@@ -164,7 +164,7 @@ set.seed(557976883)
 #' First, we read in the data:
 #' 
 ## ----load_bbs------------------------------------------------------------
-bsflu_data <- read.table("http://kingaa.github.io/short-course/stochsim/bsflu_data.txt")
+bsflu_data <- read.table("http://kingaa.github.io/clim-dis/stochsim/bsflu_data.txt")
 
 #' 
 #' Our model is a variation on a basic SIR Markov chain, with state $X(t)=(S(t),I(t),R_1(t),R_2(t),R_3(t))$ giving the number of individuals in the susceptible and infectious categories, and three stages of recovery.
@@ -583,7 +583,7 @@ write.csv(results,file="bsflu_params.csv",row.names=FALSE)
 #' --------------------------
 #' 
 #' ## [Back to course homepage](http://kingaa.github.io/short-course)
-#' ## [**R** codes for this document](http://raw.githubusercontent.com/kingaa/short-course/master/mif/mif.R)
+#' ## [**R** codes for this document](http://raw.githubusercontent.com/kingaa/clim-dis/master/mif/mif.R)
 #' 
 #' ----------------------
 #' 

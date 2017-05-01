@@ -365,7 +365,7 @@ logLik(pf)
 #' 
 #' Download and plot the data:
 ## ----parus-data----------------------------------------------------------
-loc <- url("http://kingaa.github.io/short-course/intro/parus.csv")
+loc <- url("http://kingaa.github.io/clim-dis/intro/parus.csv")
 dat <- read.csv(loc)
 head(dat)
 plot(pop~year,data=dat,type='o')
@@ -520,7 +520,7 @@ lines(N~time,data=traj,type='l',col='red')
 #' ------------------------------
 #' 
 #' ## [Back to course homepage](http://kingaa.github.io/short-course)
-#' ## [**R** codes for this document](http://raw.githubusercontent.com/kingaa/short-course/master/intro/intro.R)
+#' ## [**R** codes for this document](http://raw.githubusercontent.com/kingaa/clim-dis/master/intro/intro.R)
 #' 
 #' ----------------------
 #' 

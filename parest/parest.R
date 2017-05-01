@@ -74,7 +74,7 @@ set.seed(1173439184)
 #' To download and plot the data, do, e.g.,
 #' 
 ## ----niamey-data,warning=FALSE-------------------------------------------
-niamey <- read.csv("http://kingaa.github.io/short-course/parest/niamey.csv")
+niamey <- read.csv("http://kingaa.github.io/clim-dis/parest/niamey.csv")
 ggplot(niamey,mapping=aes(x=biweek,y=measles,color=community))+
   geom_line()+geom_point()
 
@@ -708,6 +708,6 @@ signif(mle3,3)
 #' --------------------------
 #' 
 #' ## [Back to course homepage](http://kingaa.github.io/short-course)
-#' ## [**R** codes for this document](http://raw.githubusercontent.com/kingaa/short-course/master/parest/parest.R)
+#' ## [**R** codes for this document](http://raw.githubusercontent.com/kingaa/clim-dis/master/parest/parest.R)
 #' 
 #' ## References

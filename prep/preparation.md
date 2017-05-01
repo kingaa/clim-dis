@@ -21,8 +21,8 @@ In **R**, you can run `Sys.info()` to get a printout of the operating system and
 ### Install **R** and **RStudio**
 
 **R** and **RStudio** are free and open-source.
-You’ll need at least version 3.3.0 of **R**.
-The latest version is 3.3.1, so if you need to update, go ahead and install version 3.3.1.
+You’ll need at least version 3.3.3 of **R**.
+If you need to update, go ahead and install the latest version, which is 3.4.0.
 Source code and binaries are available on CRAN (http://cran.r-project.org).
 Install the latest version of **RStudio** from [rstudio.com](http://www.rstudio.com/products/rstudio/download/).
 
@@ -44,7 +44,7 @@ Open a session in **RStudio** and run the following:
 
 ```
 > update.packages()
-> source("http://kingaa.github.io/short-course/prep/packages.R")
+> source("http://kingaa.github.io/clim-dis/prep/packages.R")
 > source("http://kingaa.github.io/scripts/pompTest.R")
 ```
 

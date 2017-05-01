@@ -94,7 +94,7 @@ Biweekly data for outbreaks of measles in three communities within Niamey, Niger
 To download and plot the data, do, e.g.,
 
 ```{r niamey-data,warning=FALSE}
-niamey <- read.csv("http://kingaa.github.io/short-course/parest/niamey.csv")
+niamey <- read.csv("http://kingaa.github.io/clim-dis/parest/niamey.csv")
 ggplot(niamey,mapping=aes(x=biweek,y=measles,color=community))+
   geom_line()+geom_point()
 ```
@@ -800,6 +800,6 @@ Modify the codes above to reflect these more appropriate assumptions, estimate t
 --------------------------
 
 ## [Back to course homepage](http://kingaa.github.io/short-course)
-## [**R** codes for this document](http://raw.githubusercontent.com/kingaa/short-course/master/parest/parest.R)
+## [**R** codes for this document](http://raw.githubusercontent.com/kingaa/clim-dis/master/parest/parest.R)
 
 ## References
