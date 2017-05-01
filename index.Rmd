@@ -47,6 +47,8 @@ options(
   )
 ```
 
+----------------------------
+
 ### Instructor
 
 Prof.&nbsp;Aaron A. King, Ph.D.  
