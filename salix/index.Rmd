@@ -6,6 +6,6 @@ output: html_document
 
 ----------------------
 
-### [Course website](http://kingaa.github.io/short-course).
+### [Course website](http://kingaa.github.io/clim-dis).
 
 ----------------------

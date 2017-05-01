@@ -602,7 +602,7 @@ m1 %>%
 #' 
 #' --------------------------
 #' 
-#' ## [Back to course homepage](http://kingaa.github.io/short-course)
+#' ## [Back to course homepage](http://kingaa.github.io/clim-dis)
 #' ## [**R** codes for this document](http://raw.githubusercontent.com/kingaa/clim-dis/master/measles/measles.R)
 #' ## [Profile likelihood computation for this example](./profile.html)
 #' 
