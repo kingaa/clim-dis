@@ -25,7 +25,7 @@
 #' [Licensed under the Creative Commons Attribution-NonCommercial license](http://creativecommons.org/licenses/by-nc/4.0/).
 #' Please share and remix noncommercially, mentioning its origin.  
 #' ![CC-BY_NC](../graphics/cc-by-nc.png)
-#' This document has its origins in the [SISMID short course on Simulation-based Inference](https://kingaa.github.io/sbied/stochsim/stochsim.html) given by Aaron King and Edward Ionides.
+#' This document has its origins in the [SISMID short course on Simulation-based Inference](http://kingaa.github.io/sbied/stochsim/stochsim.html) given by Aaron King and Edward Ionides.
 #' 
 #' Produced with **R** version `r getRversion()` and **pomp** version `r packageVersion("pomp")`.
 #' 
@@ -118,7 +118,7 @@ set.seed(594709947L)
 #' &\prob{N_{IR}(t+\delta)=N_{IR}(t)+1} &=& &\mu_{IR}(t)\,I(t)\,\delta + o(\delta)\\
 #' &\prob{N_{IR}(t+\delta)=N_{IR}(t)} &=& &1-\mu_{IR}(t)\,I(t)\,\delta + o(\delta)\\
 #' \end{aligned}$$
-#' - A *simple* counting process is one for which no more than one event can occur at a time ([Wikipedia: point process](https://en.wikipedia.org/wiki/Point_process)). 
+#' - A *simple* counting process is one for which no more than one event can occur at a time ([Wikipedia: point process](http://en.wikipedia.org/wiki/Point_process)). 
 #'   Thus, in a technical sense, the SIR Markov chain model we have written is simple. 
 #'   One may want to model the extra randomness resulting from multiple simultaneous events:
 #'   someone sneezing in a crowded bus, large gatherings at football matches, etc. 
@@ -138,7 +138,7 @@ set.seed(594709947L)
 #' 
 #' ### Euler's method for ODE
 #' 
-#' - [Euler](https://en.wikipedia.org/wiki/Leonhard_Euler) took the following approach to numeric solution of an ODE:
+#' - [Euler](http://en.wikipedia.org/wiki/Leonhard_Euler) took the following approach to numeric solution of an ODE:
 #'     + He wanted to investigate an ODE $$\frac{dx}{dt}=h(x,t)$$
 #'       with an initial condition $x(0)$. 
 #'       He supposed this ODE has some true solution $x(t)$ which could not be worked out analytically. 
@@ -148,7 +148,7 @@ set.seed(594709947L)
 #'       Therefore, he defined $$\tilde{x}\big((k+1)\delta\big) = \tilde{x}(k\delta) + \delta\,h\big(\tilde{x}(k\delta),k\delta\big).$$
 #'    + This defines $\tilde x(t)$ when only for those $t$ that are multiples of $\delta$, but let's suppose $\tilde x(t)$ is constant between these discrete times.
 #' - We now have a numerical scheme, stepping forwards in time increments of size $\delta$, that can be readily evaluated by computer.
-#' - [Mathematical analysis of Euler's method](https://en.wikipedia.org/wiki/Euler_method) says that, as long as the function $h(x)$ is not too exotic, then $x(t)$ is well approximated by $\tilde x(t)$  when the discretization time-step, $\delta$, is sufficiently small.
+#' - [Mathematical analysis of Euler's method](http://en.wikipedia.org/wiki/Euler_method) says that, as long as the function $h(x)$ is not too exotic, then $x(t)$ is well approximated by $\tilde x(t)$  when the discretization time-step, $\delta$, is sufficiently small.
 #' - Euler's method is not the only numerical scheme to solve ODEs. 
 #'   More advanced schemes have better convergence properties, meaning that the numerical approximation is closer to $x(t)$.
 #'   However, there are 3 reasons we choose to lean heavily on Euler's method:
@@ -228,11 +228,11 @@ set.seed(594709947L)
 #' 
 #' ### Euler's method vs.&nbsp;Gillspie's algorithm
 #' 
-#' - A widely used, exact simulation method for continuous time Markov chains is [Gillspie's algorithm](https://en.wikipedia.org/wiki/Gillespie_algorithm) [@Gillespie1977a].
+#' - A widely used, exact simulation method for continuous time Markov chains is [Gillspie's algorithm](http://en.wikipedia.org/wiki/Gillespie_algorithm) [@Gillespie1977a].
 #'   We do not put much emphasis on Gillespie's algorithm here. 
 #'   Why?
 #'   When would you prefer an implementation of Gillespie's algorithm to an Euler solution?
-#' - Numerically, Gillespie's algorithm is often approximated using so-called [tau-leaping](https://en.wikipedia.org/wiki/Tau-leaping) methods [@Gillespie2001]. 
+#' - Numerically, Gillespie's algorithm is often approximated using so-called [tau-leaping](http://en.wikipedia.org/wiki/Tau-leaping) methods [@Gillespie2001]. 
 #'   These are closely related to Euler's approach.
 #'   Is it reasonable to call a suitable Euler approach a tau-leaping method?
 #' 

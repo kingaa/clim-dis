@@ -23,7 +23,7 @@
 #' [Licensed under the Creative Commons Attribution-NonCommercial license](http://creativecommons.org/licenses/by-nc/4.0/).
 #' Please share and remix noncommercially, mentioning its origin.  
 #' ![CC-BY_NC](../graphics/cc-by-nc.png)
-#' This document has its origins in the [SISMID short course on Simulation-based Inference](https://kingaa.github.io/sbied/intro/intro.html) given by Aaron King and Edward Ionides.
+#' This document has its origins in the [SISMID short course on Simulation-based Inference](http://kingaa.github.io/sbied/intro/intro.html) given by Aaron King and Edward Ionides.
 #' 
 #' Produced in **R** version `r getRversion()` using **pomp** version `r packageVersion("pomp")`.
 #' 
@@ -365,8 +365,7 @@ logLik(pf)
 #' 
 #' Download and plot the data:
 ## ----parus-data----------------------------------------------------------
-loc <- url("http://kingaa.github.io/clim-dis/intro/parus.csv")
-dat <- read.csv(loc)
+dat <- read.csv("http://kingaa.github.io/clim-dis/intro/parus.csv")
 head(dat)
 plot(pop~year,data=dat,type='o')
 
@@ -407,7 +406,7 @@ stochStep <- Csnippet("
 pomp(parus,rprocess=discrete.time.sim(step.fun=stochStep,delta.t=1),
      paramnames=c("r","sigma"),statenames=c("N","e")) -> parus
 
-#' Note that in the above, we use the `exp` and `rnorm` functions from the [**R** API](https://cran.r-project.org/doc/manuals/r-release/R-exts.html#The-R-API).
+#' Note that in the above, we use the `exp` and `rnorm` functions from the [**R** API](http://cran.r-project.org/doc/manuals/r-release/R-exts.html#The-R-API).
 #' In general any C function provided by **R** is available to you.
 #' **pomp** also provides a number of C functions that are documented in the header file, `pomp.h`, that is installed with the package.
 #' See the `Csnippet` documentation (`?Csnippet`) to read more about how to write them.

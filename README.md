@@ -1,5 +1,7 @@
 ### ICTP Climate and Disease Workshop
 
+[Course Notes](http://kingaa.github.io/clim-dis/)
+
 ----------------------------
 
 These are notes for workshop activities led by Aaron King as part of the ICTP Workshop on Mathematical Models of Climate Variability, Environmental Change and Infectious Diseases.

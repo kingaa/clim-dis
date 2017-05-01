@@ -119,43 +119,21 @@ $(document).ready(function () {
 </div>
 
 
-<hr />
 <div id="instructor" class="section level3">
 <h3>Instructor</h3>
 <p>Prof. Aaron A. King, Ph.D.<br />
 Departments of Ecology &amp; Evolutionary Biology and Mathematics<br />
 University of Michigan<br />
 Email: <a href="mailto:kingaaictp5@gmail.com">kingaaictp5@gmail.com</a></p>
+<hr />
 </div>
-<div id="perspective" class="section level3">
-<h3>Perspective</h3>
-<p>Ecological and epidemiological systems are particularly interesting from the physical point of view. Their complexity and high-dimensionality makes it natural to approach them as stochastic, nonlinear dynamical systems and within this context, many questions of both intrinsic interest and practical concern can be formulated. To answer these questions, it is necessary to rigorously confront hypothetical models with data. In this regard, time-series data are of particular value inasmuch as they have the potential to express the characteristic signatures of causal mechanisms. This course will take students into the heart of these issues via an introduction to ecological and epidemiological stochastic dynamical systems models using a series of examples with real data. Students will learn how to formulate questions as models and answer the questions using state-of-the-art inference algorithms.</p>
-</div>
-<div id="course-objectives" class="section level3">
-<h3>Course objectives</h3>
+<div id="preparing-for-the-workshop" class="section level3">
+<h3>Preparing for the workshop</h3>
 <ol style="list-style-type: decimal">
-<li>to introduce partially observed Markov process (POMP) models as tools for scientific investigation</li>
-<li>to give students the ability to formulate POMP models of their own</li>
-<li>to teach efficient approaches for performing scientific inference using POMP models</li>
-<li>to familiarize students with the <strong>pomp</strong> package</li>
-<li>to give students opportunities to work with such inference methods</li>
-<li>to provide documented examples for student re-use</li>
+<li>Complete the <a href="http://kingaa.github.io/R_Tutorial"><strong>R</strong> tutorial</a> before the beginning of the course.</li>
+<li>If you wish to use your own computer, install <strong>R</strong> and <strong>RStudio</strong> on it before the first day of the course. <a href="./prep/preparation.html">Instructions for doing so are here</a>.</li>
 </ol>
-</div>
-<div id="prerequisites" class="section level3">
-<h3>Prerequisites</h3>
-<ul>
-<li>Familiarity with deterministic dynamics (discrete-time maps, ordinary differential equations) and probability.</li>
-<li>Some programming experience, in any language.</li>
-<li>Completion of the <a href="http://kingaa.github.io/R_Tutorial"><strong>R</strong> tutorial</a> before the beginning of the course.</li>
-<li>A sense of humor.</li>
-</ul>
-</div>
-<div id="computing-in-r" class="section level3">
-<h3>Computing in <strong>R</strong></h3>
-<p>We will make extensive use of the open-source <strong>R</strong> statistical computing environment and the <strong>pomp</strong> package for inference based on partially-observed Markov process models.</p>
-<p>Students with laptops should install <strong>R</strong> and <strong>RStudio</strong> on their computers before the first day of the course. <a href="./prep/preparation.html">Instructions for doing so can be found here</a>.</p>
-<p>The course does not assume familiarity with <strong>R</strong>, but students should work through the <a href="http://kingaa.github.io/R_Tutorial"><strong>R</strong> tutorial</a> before the course commences. In particular, students should work through the the exercises in the tutorial.</p>
+<hr />
 </div>
 <div id="readings" class="section level3">
 <h3>Readings</h3>
@@ -173,26 +151,53 @@ Email: <a href="mailto:kingaaictp5@gmail.com">kingaaictp5@gmail.com</a></p>
 <ul>
 <li>A. A. King, D. Nguyen, and E. L. Ionides (2016) Statistical Inference for Partially Observed Markov Processes via the R Package pomp. <em>J. Stat. Soft.</em>, <strong>69</strong>: 1–43. <a href="http://dx.doi.org/10.18637/jss.v069.i12">DOI: 10.18637/jss.v069.i12</a></li>
 </ul>
-</div>
-<div id="preparing-for-the-course" class="section level3">
-<h3>Preparing for the course</h3>
-<p>Students should do the following <strong>before the first day of the course</strong>:</p>
-<ol style="list-style-type: decimal">
-<li>Follow the <a href="http://kingaa.github.io/clim-dis/prep/preparation.html">instructions to prepare your laptop by installing <strong>R</strong>, <strong>RStudio</strong>, and the needed <strong>R</strong> packages</a>.</li>
-<li>If you are not proficient in <strong>R</strong>, work through the <a href="http://kingaa.github.io/R_Tutorial"><strong>R</strong> tutorial</a>. If you are proficient in <strong>R</strong>, look through the tutorial nevertheless.</li>
-</ol>
-</div>
-<div id="topics" class="section level2">
-<h2>Topics</h2>
 <hr />
-<p><a href="http://kingaa.github.io/R_Tutorial"><strong>R</strong> Tutorial</a></p>
-<p><a href="http://kingaa.github.io/clim-dis/hadley/munging.html">Tutorial on data munging with <code>plyr</code>, <code>reshape2</code>, and <code>magrittr</code></a></p>
-<p><a href="http://kingaa.github.io/clim-dis/hadley/viz.html">Tutorial on <code>ggplot2</code></a></p>
-<p><a href="http://github.com/kingaa/clim-dis/">Source code for these notes</a></p>
-<p><a href="http://kingaa.github.io/pomp"><strong>pomp</strong> homepage</a></p>
+</div>
+<div id="topics" class="section level3">
+<h3>Topics</h3>
 <hr />
-<p><a href="http://creativecommons.org/licenses/by-nc/4.0/">The materials in this course are licensed under the Creative Commons Attribution-NonCommercial license</a>. Please share and remix noncommercially, mentioning its origin.<br />
-<img src="data:image/png;base64,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" alt="CC-BY_NC" /></p>
+</div>
+<div id="links" class="section level3">
+<h3>Links</h3>
+<ul>
+<li><a href="http://kingaa.github.io/R_Tutorial"><strong>R</strong> Tutorial</a><br />
+</li>
+<li><a href="http://kingaa.github.io/clim-dis/hadley/munging.html">Tutorial on data munging with <code>plyr</code>, <code>reshape2</code>, and <code>magrittr</code></a><br />
+</li>
+<li><a href="http://kingaa.github.io/clim-dis/hadley/viz.html">Tutorial on <code>ggplot2</code></a><br />
+</li>
+<li><a href="http://github.com/kingaa/clim-dis/">Source code for these notes</a><br />
+</li>
+<li><a href="http://kingaa.github.io/pomp"><strong>pomp</strong> homepage</a></li>
+</ul>
+<hr />
+</div>
+<div id="license" class="section level3">
+<h3>License</h3>
+<div class="figure">
+<img src="data:image/png;base64,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" alt="CC-BY-NC" />
+<p class="caption">CC-BY-NC</p>
+</div>
+<p>This work is licensed under the <a href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)</a>.</p>
+<ul>
+<li>Under its terms, you are free to:
+<ul>
+<li>Share — copy and redistribute the material in any medium or format</li>
+<li>Adapt — remix, transform, and build upon the material The licensor cannot revoke these freedoms as long as you follow the license terms.</li>
+</ul></li>
+<li>Under the following terms:
+<ul>
+<li>Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.</li>
+<li>Non-Commercial — You may not use the material for commercial purposes.</li>
+<li>No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.</li>
+</ul></li>
+<li>Notices:
+<ul>
+<li>You do not have to comply with the license for elements of the material in the public domain or where your use is permitted by an applicable exception or limitation.</li>
+<li>No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.</li>
+</ul></li>
+</ul>
+<hr />
 </div>
 
 

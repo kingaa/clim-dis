@@ -19,7 +19,7 @@
 #' [Licensed under the Creative Commons Attribution-NonCommercial license](http://creativecommons.org/licenses/by-nc/4.0/).
 #' Please share and remix noncommercially, mentioning its origin.  
 #' ![CC-BY_NC](../graphics/cc-by-nc.png)
-#' This document has its origins in the [SISMID short course on Simulation-based Inference](https://kingaa.github.io/sbied/mif/mif.html) given by Aaron King and Edward Ionides.
+#' This document has its origins in the [SISMID short course on Simulation-based Inference](http://kingaa.github.io/sbied/mif/mif.html) given by Aaron King and Edward Ionides.
 #' 
 #' Produced with **R** version `r getRversion()` and **pomp** version `r packageVersion("pomp")`.
 #' 
@@ -538,7 +538,7 @@ write.csv(results,file="bsflu_params.csv",row.names=FALSE)
 #' + If $\theta_i$ is a parameter that affects the dynamics or observations throughout the timeseries, it is called a __regular parameter__, and it is often appropriate to specify $$v_{i,n} = v_i.$$
 #' + If $\theta_j$ is a parameter that affects only the initial conditions of the dynamic model, it is called an __initial value parameter__ (IVP) and it is appropriate to specify $$v_{j,n} = \left\{\begin{array}{ll} v_j & \mbox{if $n=0$} \\0 & \mbox{if $n>0$} \end{array}\right.$$
 #' + If $\theta_k$ is a break-point parameter that models how the system changes at time $t_q$ then $\theta_k$ is like an IVP at time $t_q$ and it is appropriate to specify $$v_{j,n} = \left\{\begin{array}{ll} v_j & \mbox{if $n=q$} \\	0 & \mbox{if $n\neq q$} \end{array}\right.$$
-#' * $\sigma_{1:M}$ is called a __cooling schedule__, following a thermodynamic analogy popularized by [simulated annealing](https://en.wikipedia.org/wiki/Simulated_annealing).
+#' * $\sigma_{1:M}$ is called a __cooling schedule__, following a thermodynamic analogy popularized by [simulated annealing](http://en.wikipedia.org/wiki/Simulated_annealing).
 #' As $\sigma_m$ becomes small, the system cools toward a "freezing point".
 #' If the algorithm is working sucessfully, the freezing point should be close to the lowest-energy state of the system, i.e., the MLE.
 #' * It is generally helpful for optimization to provide transformations of the parameters so that (on the estimation scale) they are real-valued and have uncertainty on the order of 1 unit.
