@@ -1,4 +1,4 @@
-MODULES = prep intro stochsim parest pfilter mif polio measles salix hadley
+MODULES = prep intro stochsim parest pfilter mif polio measles hadley
 
 default: index.html modules
 
