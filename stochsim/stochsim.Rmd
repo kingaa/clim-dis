@@ -486,7 +486,7 @@ Obtain some ballpark estimates of the parameters and simulate to see if you can 
 
 --------------------------
 
-## [Back to course homepage](http://kingaa.github.io/clim-dis)
+## [Back to course homepage](../)
 ## [**R** codes for this document](http://raw.githubusercontent.com/kingaa/clim-dis/master/stochsim/stochsim.R)
 
 --------------------------

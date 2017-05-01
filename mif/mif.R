@@ -582,7 +582,7 @@ write.csv(results,file="bsflu_params.csv",row.names=FALSE)
 #' 
 #' --------------------------
 #' 
-#' ## [Back to course homepage](http://kingaa.github.io/clim-dis)
+#' ## [Back to course homepage](../)
 #' ## [**R** codes for this document](http://raw.githubusercontent.com/kingaa/clim-dis/master/mif/mif.R)
 #' 
 #' ----------------------

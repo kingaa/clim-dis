@@ -253,7 +253,7 @@ Specifically, if the tails of $g$ are lighter than those of $f$, the Monte Carlo
 
 --------------------------
 
-## [Back to course homepage](http://kingaa.github.io/clim-dis)
+## [Back to course homepage](../)
 
 --------------------------
 

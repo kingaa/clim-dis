@@ -156,7 +156,7 @@ $(document).ready(function () {
 <li><a href="#the-operator">The <code>%&gt;%</code> operator</a></li>
 <li><a href="#the-operator-1">The <code>%&lt;&gt;%</code> operator</a></li>
 </ul></li>
-<li><a href="#back-to-course-homepage"><a href="http://kingaa.github.io/clim-dis">Back to course homepage</a></a></li>
+<li><a href="#back-to-course-homepage"><a href="../">Back to course homepage</a></a></li>
 <li><a href="#r-codes-for-this-document"><a href="http://raw.githubusercontent.com/kingaa/clim-dis/master/hadley/viz.R"><strong>R</strong> codes for this document</a></a></li>
 <li><a href="#references">References</a></li>
 </ul>
@@ -212,13 +212,12 @@ arrange(x,a,b,c)
 arrange(x,b,c,a)
 arrange(x,c,b,a)</code></pre>
 <pre class="r"><code>read.csv(&quot;http://kingaa.github.io/clim-dis/hadley/energy_production.csv&quot;,comment=&quot;#&quot;) -&gt; energy</code></pre>
-<pre><code>## Warning in file(file, &quot;rt&quot;): cannot open URL 'http://kingaa.github.io/clim-
-## dis/hadley/energy_production.csv': HTTP status was '404 Not Found'</code></pre>
-<pre><code>## Error in file(file, &quot;rt&quot;): cannot open the connection</code></pre>
-<pre class="r"><code>arrange(energy,region,source,year)</code></pre>
-<pre><code>## Error in is.data.frame(df): object 'energy' not found</code></pre>
-<pre class="r"><code>arrange(energy,-TJ,year)</code></pre>
-<pre><code>## Error in is.data.frame(df): object 'energy' not found</code></pre>
+<pre><code>## Warning in file(file, &quot;rt&quot;): &quot;internal&quot; method cannot handle
+## https redirection to: 'https://kingaa.github.io/clim-dis/hadley/
+## energy_production.csv'</code></pre>
+<pre><code>## Warning in file(file, &quot;rt&quot;): &quot;internal&quot; method failed, so trying &quot;libcurl&quot;</code></pre>
+<pre class="r"><code>arrange(energy,region,source,year)
+arrange(energy,-TJ,year)</code></pre>
 </div>
 <div id="count" class="section level4">
 <h4><code>count</code></h4>
@@ -380,7 +379,7 @@ energy %&gt;%
 </div>
 </div>
 <div id="back-to-course-homepage" class="section level2">
-<h2><a href="http://kingaa.github.io/clim-dis">Back to course homepage</a></h2>
+<h2><a href="../">Back to course homepage</a></h2>
 </div>
 <div id="r-codes-for-this-document" class="section level2">
 <h2><a href="http://raw.githubusercontent.com/kingaa/clim-dis/master/hadley/viz.R"><strong>R</strong> codes for this document</a></h2>
