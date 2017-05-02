@@ -62,7 +62,7 @@ opts_chunk$set(
   fig.align='center',
   fig.height=4,fig.width=6.83,
   dpi=100,
-  dev='CairoPNG',
+  dev='png',
   dev.args=list(bg='transparent')
   )
 options(
