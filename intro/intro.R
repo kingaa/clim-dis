@@ -1,6 +1,12 @@
+params <-
+structure(list(prefix = "intro"), .Names = "prefix")
+
 #' ---
 #' title: "Introduction to partially observed Markov processes"
+#' subtitle: 'ICTP Workshop on Mathematical Models of Climate Variability, Environmental Change and Infectious Diseases'
 #' author: "Aaron A. King"
+#' params:
+#'   prefix: "intro"
 #' output:
 #'   html_document:
 #'     toc: yes
@@ -15,10 +21,16 @@
 #' \newcommand\prob[1]{\mathbb{P}\left[{#1}\right]}
 #' \newcommand\expect[1]{\mathbb{E}\left[{#1}\right]}
 #' \newcommand\var[1]{\mathrm{Var}\left[{#1}\right]}
+#' \newcommand\cov[1]{\mathrm{Cov}\left[{#1}\right]}
 #' \newcommand\dist[2]{\mathrm{#1}\left(#2\right)}
 #' \newcommand\dlta[1]{{\Delta}{#1}}
+#' \newcommand{\dd}[1]{\mathrm{d}{#1}}
+#' \newcommand{\transpose}{\mathrm{T}}
 #' \newcommand\lik{\mathcal{L}}
 #' \newcommand\loglik{\ell}
+#' \newcommand{\scinot}[2]{#1{\times}10^{#2}}
+#' \newcommand{\pd}[3][]{\frac{\partial^{#1}{#2}}{\partial{#3}^{#1}}}
+#' \newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}{#2}}{\mathrm{d}{#3}^{#1}}}
 #' 
 #' [Licensed under the Creative Commons Attribution-NonCommercial license](http://creativecommons.org/licenses/by-nc/4.0/).
 #' Please share and remix noncommercially, mentioning its origin.  

@@ -1,22 +1,34 @@
+params <-
+structure(list(prefix = "odes"), .Names = "prefix")
+
 #' ---
 #' title: "Working with ordinary differential equations in **pomp**"
+#' subtitle: 'ICTP Workshop on Mathematical Models of Climate Variability, Environmental Change and Infectious Diseases'
 #' author: "Aaron A. King"
+#' date: '8--19 May 2017'
+#' params:
+#'   prefix: "odes"
 #' output:
 #'   html_document:
 #'     toc: yes
 #'     toc_depth: 4
 #' bibliography: ../course.bib
 #' csl: ../ecology.csl
-#' 
 #' ---
 #' 
 #' \newcommand\prob[1]{\mathbb{P}\left[{#1}\right]}
 #' \newcommand\expect[1]{\mathbb{E}\left[{#1}\right]}
 #' \newcommand\var[1]{\mathrm{Var}\left[{#1}\right]}
+#' \newcommand\cov[1]{\mathrm{Cov}\left[{#1}\right]}
 #' \newcommand\dist[2]{\mathrm{#1}\left(#2\right)}
 #' \newcommand\dlta[1]{{\Delta}{#1}}
+#' \newcommand{\dd}[1]{\mathrm{d}{#1}}
+#' \newcommand{\transpose}{\mathrm{T}}
 #' \newcommand\lik{\mathcal{L}}
 #' \newcommand\loglik{\ell}
+#' \newcommand{\scinot}[2]{#1{\times}10^{#2}}
+#' \newcommand{\pd}[3][]{\frac{\partial^{#1}{#2}}{\partial{#3}^{#1}}}
+#' \newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}{#2}}{\mathrm{d}{#3}^{#1}}}
 #' 
 #' This lesson is based on notes developed over the years and contains contributions originally made by Ben Bolker, John Drake, Pej Rohani, and David Smith.
 #' It is [licensed under the Creative Commons Attribution-NonCommercial license](http://creativecommons.org/licenses/by-nc/4.0/).
@@ -237,12 +249,12 @@ pomp(data=data.frame(time=seq(0,20,by=1/52),cases=NA),
 #' 
 #' We'll need to specify a birth/death rate in addition to the two parameters we specified before:
 ## ----set-open-params-----------------------------------------------------
-params <- c(mu=1/50,Beta=400,gamma=13,
-            N=100000,S_0=100000/12,I_0=100)
+params3 <- c(mu=1/50,Beta=400,gamma=13,
+  N=100000,S_0=100000/12,I_0=100)
 
 #' We integrate the equations as before:
 ## ----solve-open-sir------------------------------------------------------
-x <- trajectory(open.sir,params=params,as=TRUE)
+x <- trajectory(open.sir,params=params3,as=TRUE)
 
 #' 
 #' We can plot each of the state variables against time, and $I$ against $S$:
@@ -311,10 +323,10 @@ pomp(open.sir,
      paramnames=c("beta0","beta1","gamma","mu","N","S_0","I_0")
 ) -> seas.sir
 
-params3 <- c(mu=1/50,beta0=400,beta1=0.15,gamma=26,
+params4 <- c(mu=1/50,beta0=400,beta1=0.15,gamma=26,
              N=1e5,S_0=7000,I_0=50)
 
-trajectory(seas.sir,params=params3,as=TRUE) -> x
+trajectory(seas.sir,params=params4,as=TRUE) -> x
 
 library(ggplot2)
 ggplot(x,mapping=aes(x=time,y=I))+geom_path()
@@ -330,7 +342,7 @@ ggplot(x,mapping=aes(x=S,y=I))+geom_path()
 #' --------------------------
 #' 
 #' 
-#' ## [Back to course homepage](http://kingaa.github.io/clim-dis)
+#' ## [Back to course homepage](../)
 #' ## [**R** codes for this document](http://raw.githubusercontent.com/kingaa/clim-dis/master/parest/odes.R)
 #' 
 #' ## References

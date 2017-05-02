@@ -1,5 +1,6 @@
 ---
-title: 'Workshop on Mathematical Models of Climate Variability, Environmental Change and Infectious Diseases'
+title: "Model-based Inference"
+subtitle: 'ICTP Workshop on Mathematical Models of Climate Variability, Environmental Change and Infectious Diseases'
 date: '8--19 May 2017'
 output: html_document
 bibliography: course.bib

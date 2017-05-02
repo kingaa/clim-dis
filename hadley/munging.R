@@ -1,3 +1,6 @@
+params <-
+structure(list(prefix = "munge"), .Names = "prefix")
+
 #' ---
 #' title: "Data munging with **plyr**, **reshape2**, and **magrittr**"
 #' author: "Aaron A. King"
@@ -5,9 +8,26 @@
 #'   html_document:
 #'     toc: yes
 #'     toc_depth: 4
+#' params:
+#'   prefix: "munge"
 #' bibliography: ../course.bib
 #' csl: ../ecology.csl
+#' 
 #' ---
+#' 
+#' \newcommand\prob[1]{\mathbb{P}\left[{#1}\right]}
+#' \newcommand\expect[1]{\mathbb{E}\left[{#1}\right]}
+#' \newcommand\var[1]{\mathrm{Var}\left[{#1}\right]}
+#' \newcommand\cov[1]{\mathrm{Cov}\left[{#1}\right]}
+#' \newcommand\dist[2]{\mathrm{#1}\left(#2\right)}
+#' \newcommand\dlta[1]{{\Delta}{#1}}
+#' \newcommand{\dd}[1]{\mathrm{d}{#1}}
+#' \newcommand{\transpose}{\mathrm{T}}
+#' \newcommand\lik{\mathcal{L}}
+#' \newcommand\loglik{\ell}
+#' \newcommand{\scinot}[2]{#1{\times}10^{#2}}
+#' \newcommand{\pd}[3][]{\frac{\partial^{#1}{#2}}{\partial{#3}^{#1}}}
+#' \newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}{#2}}{\mathrm{d}{#3}^{#1}}}
 #' 
 #' 
 #' ## How to use this document.

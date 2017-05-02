@@ -117,7 +117,9 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Working with ordinary differential equations in <strong>pomp</strong></h1>
+<h3 class="subtitle"><em>ICTP Workshop on Mathematical Models of Climate Variability, Environmental Change and Infectious Diseases</em></h3>
 <h4 class="author"><em>Aaron A. King</em></h4>
+<h4 class="date"><em>8–19 May 2017</em></h4>
 
 </div>
 
@@ -264,10 +266,10 @@ pomp(data=data.frame(time=seq(0,20,by=1/52),cases=NA),
      paramnames=c(&quot;Beta&quot;,&quot;gamma&quot;,&quot;mu&quot;,&quot;S_0&quot;,&quot;I_0&quot;,&quot;N&quot;)
 ) -&gt; open.sir</code></pre>
 <p>We’ll need to specify a birth/death rate in addition to the two parameters we specified before:</p>
-<pre class="r"><code>params &lt;- c(mu=1/50,Beta=400,gamma=13,
-            N=100000,S_0=100000/12,I_0=100)</code></pre>
+<pre class="r"><code>params3 &lt;- c(mu=1/50,Beta=400,gamma=13,
+  N=100000,S_0=100000/12,I_0=100)</code></pre>
 <p>We integrate the equations as before:</p>
-<pre class="r"><code>x &lt;- trajectory(open.sir,params=params,as=TRUE)</code></pre>
+<pre class="r"><code>x &lt;- trajectory(open.sir,params=params3,as=TRUE)</code></pre>
 <p>We can plot each of the state variables against time, and <span class="math inline">\(I\)</span> against <span class="math inline">\(S\)</span>:</p>
 <pre class="r"><code>library(ggplot2)
 ggplot(data=x,mapping=aes(x=time,y=I))+geom_line()
@@ -316,10 +318,10 @@ pomp(open.sir,
      paramnames=c(&quot;beta0&quot;,&quot;beta1&quot;,&quot;gamma&quot;,&quot;mu&quot;,&quot;N&quot;,&quot;S_0&quot;,&quot;I_0&quot;)
 ) -&gt; seas.sir
 
-params3 &lt;- c(mu=1/50,beta0=400,beta1=0.15,gamma=26,
+params4 &lt;- c(mu=1/50,beta0=400,beta1=0.15,gamma=26,
              N=1e5,S_0=7000,I_0=50)
 
-trajectory(seas.sir,params=params3,as=TRUE) -&gt; x
+trajectory(seas.sir,params=params4,as=TRUE) -&gt; x
 
 library(ggplot2)
 ggplot(x,mapping=aes(x=time,y=I))+geom_path()</code></pre>

@@ -225,21 +225,16 @@ arrange(energy,-TJ,year)</code></pre>
 <pre class="r"><code>count(x,~c)
 count(x,~a+c)
 count(x,vars=c('a','c'))</code></pre>
-<pre class="r"><code>count(energy,~source+region)</code></pre>
-<pre><code>## Error in count(energy, ~source + region): object 'energy' not found</code></pre>
-<pre class="r"><code>count(energy,~source+TJ)</code></pre>
-<pre><code>## Error in count(energy, ~source + TJ): object 'energy' not found</code></pre>
+<pre class="r"><code>count(energy,~source+region)
+count(energy,~source+TJ)</code></pre>
 </div>
 <div id="summarise-and-summarize" class="section level4">
 <h4><code>summarise</code> and <code>summarize</code></h4>
 <p>Given a data frame, <code>summarise</code> (synonym <code>summarize</code>), produces a new data frame.</p>
 <pre class="r"><code>summarize(x,mean=mean(b),sd=sd(b),top=c[1])</code></pre>
-<pre class="r"><code>summarize(energy,tot=sum(TJ),n=length(TJ))</code></pre>
-<pre><code>## Error in is.data.frame(.data): object 'energy' not found</code></pre>
-<pre class="r"><code>summarize(energy,range(year))</code></pre>
-<pre><code>## Error in is.data.frame(.data): object 'energy' not found</code></pre>
-<pre class="r"><code>summarize(energy,min(year),max(year),interval=diff(range(year)))</code></pre>
-<pre><code>## Error in is.data.frame(.data): object 'energy' not found</code></pre>
+<pre class="r"><code>summarize(energy,tot=sum(TJ),n=length(TJ))
+summarize(energy,range(year))
+summarize(energy,min(year),max(year),interval=diff(range(year)))</code></pre>
 </div>
 <div id="mutate" class="section level4">
 <h4><code>mutate</code></h4>
@@ -253,10 +248,8 @@ count(x,vars=c('a','c'))</code></pre>
 subset(x,select=c(b,c))
 subset(x,select=-c(d))
 subset(x,d&gt;1.2,select=-e)</code></pre>
-<pre class="r"><code>subset(energy,year&gt;2010,select=c(source,TJ))</code></pre>
-<pre><code>## Error in subset(energy, year &gt; 2010, select = c(source, TJ)): object 'energy' not found</code></pre>
-<pre class="r"><code>subset(energy,year&gt;2010&amp;source%in%c(&quot;Nuclear&quot;,&quot;Oil&quot;),select=-source)</code></pre>
-<pre><code>## Error in subset(energy, year &gt; 2010 &amp; source %in% c(&quot;Nuclear&quot;, &quot;Oil&quot;), : object 'energy' not found</code></pre>
+<pre class="r"><code>subset(energy,year&gt;2010,select=c(source,TJ))
+subset(energy,year&gt;2010&amp;source%in%c(&quot;Nuclear&quot;,&quot;Oil&quot;),select=-source)</code></pre>
 </div>
 <div id="merge-and-join" class="section level4">
 <h4><code>merge</code> and <code>join</code></h4>
@@ -282,36 +275,27 @@ join(x,y,by='a',type='inner')</code></pre>
 <div id="ddply" class="section level4">
 <h4><code>ddply</code></h4>
 <p>This is probably the most useful of the lot. It splits a data frame according to some criterion, conveniently expressed as a formula involving the variables of the data frame, applies a specified function, and combines the results back into a data frame. It is best to use a function that returns a data frame, but if the function returns something else, <code>ddply</code> will attempt to coerce the value into a data frame. Here are some examples:</p>
-<pre class="r"><code>x &lt;- ddply(energy,~region+source,subset,TJ==max(TJ)); x</code></pre>
-<pre><code>## Error in empty(.data): object 'energy' not found</code></pre>
-<pre class="r"><code>x &lt;- ddply(energy,~region+source,summarize,TJ=mean(TJ)); x</code></pre>
-<pre><code>## Error in empty(.data): object 'energy' not found</code></pre>
+<pre class="r"><code>x &lt;- ddply(energy,~region+source,subset,TJ==max(TJ)); x
+x &lt;- ddply(energy,~region+source,summarize,TJ=mean(TJ)); x</code></pre>
 <p>Notice that only combinations of the variables that exist are included in the result by default.</p>
 </div>
 <div id="daply" class="section level4">
 <h4><code>daply</code></h4>
 <p>This one is very similar, except that (as the name implies), the result is returned as an array:</p>
-<pre class="r"><code>daply(energy,~region,function(df) sum(df$TJ))</code></pre>
-<pre><code>## Error in eval.quoted(.variables, data): object 'energy' not found</code></pre>
-<pre class="r"><code>daply(energy,~region+source,function(df) sum(df$TJ))</code></pre>
-<pre><code>## Error in eval.quoted(.variables, data): object 'energy' not found</code></pre>
+<pre class="r"><code>daply(energy,~region,function(df) sum(df$TJ))
+daply(energy,~region+source,function(df) sum(df$TJ))</code></pre>
 </div>
 <div id="dlply" class="section level4">
 <h4><code>dlply</code></h4>
 <p>This splits the data according to the given specifications, applies the function, and returns each result (as its name implies) as a distinct element of a list.</p>
 <pre class="r"><code>dlply(energy,~region,summarize,TJ=sum(TJ))</code></pre>
-<pre><code>## Error in eval.quoted(.variables, data): object 'energy' not found</code></pre>
 </div>
 <div id="adply-aaply-alply" class="section level4">
 <h4><code>adply</code>, <code>aaply</code>, <code>alply</code></h4>
 <p>These take arrays and, like the <strong>base</strong> function <code>apply</code>, divide the array up into slices along specified directions. They then apply a function to each slice and return the results in the desired form (if possible). As an example, we first create an array from <code>dat</code>, then act on it with each of these.</p>
-<pre class="r"><code>mutate(energy,time=year-min(year)) -&gt; dat</code></pre>
-<pre><code>## Error in is.data.frame(.data): object 'energy' not found</code></pre>
-<pre class="r"><code>daply(dat,~source+region,function(df) min(df$time)) -&gt; A; A</code></pre>
-<pre><code>## Error in eval.quoted(.variables, data): object 'dat' not found</code></pre>
-<pre><code>## Error in eval(expr, envir, enclos): object 'A' not found</code></pre>
-<pre class="r"><code>aaply(A,1,max)</code></pre>
-<pre><code>## Error in is.vector(x): object 'A' not found</code></pre>
+<pre class="r"><code>mutate(energy,time=year-min(year)) -&gt; dat
+daply(dat,~source+region,function(df) min(df$time)) -&gt; A; A
+aaply(A,1,max)</code></pre>
 </div>
 <div id="exercise" class="section level4">
 <h4>Exercise</h4>
@@ -340,15 +324,13 @@ join(x,y,by='a',type='inner')</code></pre>
 <h4><code>rename</code>, <code>revalue</code>, <code>mapvalues</code></h4>
 <p><code>rename</code> helps one to change the (column) names of a data frame.</p>
 <pre class="r"><code>x &lt;- rename(energy,c(TJ='energy',year=&quot;time&quot;)); head(x)</code></pre>
-<pre><code>## Error in revalue(names(x), replace, warn_missing = warn_missing): object 'energy' not found</code></pre>
 <p><code>revalue</code> allows you to change one or more of the levels of a factor without worrying about how the factors are coded.</p>
 <p><code>mapvalues</code> does the same, but works on vectors of any type.</p>
 <pre class="r"><code>mutate(energy,region=revalue(region,c(`Asia and Oceania`=&quot;Asia&quot;,
-                                      `Central and South America`=&quot;Latin.America&quot;))); </code></pre>
-<pre><code>## Error in is.data.frame(.data): object 'energy' not found</code></pre>
-<pre class="r"><code>mutate(energy,source=mapvalues(source,from=c(&quot;Coal&quot;,&quot;Gas&quot;,&quot;Oil&quot;),
+                                      `Central and South America`=&quot;Latin.America&quot;))); 
+
+mutate(energy,source=mapvalues(source,from=c(&quot;Coal&quot;,&quot;Gas&quot;,&quot;Oil&quot;),
                                to=c(&quot;Carbon&quot;,&quot;Carbon&quot;,&quot;Carbon&quot;)))</code></pre>
-<pre><code>## Error in is.data.frame(.data): object 'energy' not found</code></pre>
 </div>
 </div>
 </div>
@@ -374,7 +356,6 @@ energy %&gt;%
   subset(year&gt;=1990) %&gt;%
   ddply(~source+year,summarize,TJ=sum(TJ)) %&gt;%
   ddply(~source,summarize,TJ=mean(TJ))</code></pre>
-<pre><code>## Error in eval(expr, envir, enclos): object 'energy' not found</code></pre>
 <hr />
 </div>
 </div>

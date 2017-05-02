@@ -1,22 +1,34 @@
+params <-
+structure(list(prefix = "lik"), .Names = "prefix")
+
 #' ---
 #' title: "A brief introduction to the likelihood"
+#' subtitle: 'ICTP Workshop on Mathematical Models of Climate Variability, Environmental Change and Infectious Diseases'
 #' author: "Aaron A. King"
+#' date: '8--19 May 2017'
+#' params:
+#'   prefix: "lik"
 #' output:
 #'   html_document:
 #'     toc: yes
 #'     toc_depth: 4
 #' bibliography: ../course.bib
 #' csl: ../ecology.csl
-#' 
 #' ---
 #' 
 #' \newcommand\prob[1]{\mathbb{P}\left[{#1}\right]}
 #' \newcommand\expect[1]{\mathbb{E}\left[{#1}\right]}
 #' \newcommand\var[1]{\mathrm{Var}\left[{#1}\right]}
+#' \newcommand\cov[1]{\mathrm{Cov}\left[{#1}\right]}
 #' \newcommand\dist[2]{\mathrm{#1}\left(#2\right)}
 #' \newcommand\dlta[1]{{\Delta}{#1}}
+#' \newcommand{\dd}[1]{\mathrm{d}{#1}}
+#' \newcommand{\transpose}{\mathrm{T}}
 #' \newcommand\lik{\mathcal{L}}
 #' \newcommand\loglik{\ell}
+#' \newcommand{\scinot}[2]{#1{\times}10^{#2}}
+#' \newcommand{\pd}[3][]{\frac{\partial^{#1}{#2}}{\partial{#3}^{#1}}}
+#' \newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}{#2}}{\mathrm{d}{#3}^{#1}}}
 #' 
 #' This lesson is [licensed under the Creative Commons Attribution-NonCommercial license](http://creativecommons.org/licenses/by-nc/4.0/).
 #' Please share and remix noncommercially, mentioning its origin.  
@@ -134,7 +146,7 @@ plot(p,loglik,type='l',ylim=max(loglik)+c(-10,0))
 #' 
 #' --------------------------
 #' 
-#' ## [Back to course homepage](http://kingaa.github.io/clim-dis)
+#' ## [Back to course homepage](../)
 #' ## [**R** codes for this document](http://raw.githubusercontent.com/kingaa/clim-dis/master/parest/likelihood.R)
 #' 
 #' ## References
