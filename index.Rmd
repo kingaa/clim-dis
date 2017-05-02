@@ -1,6 +1,6 @@
 ---
-title: ''
-date: 'Workshop on Mathematical Models of Climate Variability, Environmental Change and Infectious Diseases'
+title: 'Workshop on Mathematical Models of Climate Variability, Environmental Change and Infectious Diseases'
+date: '8--19 May 2017'
 output: html_document
 bibliography: course.bib
 csl: ecology.csl
@@ -87,7 +87,11 @@ The **pomp** package is described and illustrated in
 
 ### Topics
 
-
+- [Introduction to partially observed Markov processes](intro/intro.html)
+- [Introduction to inference](parest/parest.html)
+- [Simulation of stochastic models](stochsim/stochsim.html)
+- [Likelihood for POMP models](pfilter/pfilter.html)
+- [Iterated filtering: principles and practice](mif/mif.html)
 
 ----------------------------
 
