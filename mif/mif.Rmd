@@ -1,6 +1,8 @@
 ---
 title: "Iterated filtering: principles and practice"
+subtitle: 'ICTP Workshop on Mathematical Models of Climate Variability, Environmental Change and Infectious Diseases'
 author: "Edward Ionides and Aaron A. King"
+date: "8--19 May 2017"
 output:
   html_document:
     toc: yes
