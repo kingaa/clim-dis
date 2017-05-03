@@ -3,8 +3,6 @@ title: Likelihood for POMP models
 subtitle: 'ICTP Workshop on Mathematical Models of Climate Variability, Environmental Change and Infectious Diseases'
 author: "Aaron A. King and Edward L. Ionides"
 date: "8--19 May 2017"
-params:
-  prefix: "pfilter"
 output:
   html_document:
     toc: yes
@@ -41,7 +39,7 @@ Produced with **R** version `r getRversion()` and **pomp** version `r packageVer
 
 ```{r knitr-opts,include=FALSE,purl=FALSE,cache=FALSE}
 library(knitr)
-prefix <- params$prefix
+prefix <- "pfilter"
 opts_chunk$set(
   progress=TRUE,
   prompt=FALSE,tidy=FALSE,highlight=TRUE,

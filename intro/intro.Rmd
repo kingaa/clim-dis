@@ -2,8 +2,6 @@
 title: "Introduction to partially observed Markov processes"
 subtitle: 'ICTP Workshop on Mathematical Models of Climate Variability, Environmental Change and Infectious Diseases'
 author: "Aaron A. King"
-params:
-  prefix: "intro"
 output:
   html_document:
     toc: yes
@@ -38,7 +36,7 @@ Produced in **R** version `r getRversion()` using **pomp** version `r packageVer
 
 ```{r knitr-opts,include=FALSE,purl=FALSE,cache=FALSE}
 library(knitr)
-prefix <- params$prefix
+prefix <- "intro"
 opts_chunk$set(
   progress=TRUE,
   prompt=FALSE,tidy=FALSE,highlight=TRUE,

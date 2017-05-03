@@ -1,13 +1,8 @@
-params <-
-structure(list(prefix = "parest"), .Names = "prefix")
-
 #' ---
 #' title: "Introduction to inference: parameter estimation"
 #' subtitle: 'ICTP Workshop on Mathematical Models of Climate Variability, Environmental Change and Infectious Diseases'
 #' author: "Aaron A. King"
 #' date: '8--19 May 2017'
-#' params:
-#'   prefix: "parest"
 #' output:
 #'   html_document:
 #'     toc: yes

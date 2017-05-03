@@ -3,8 +3,6 @@ title: "Monte Carlo Methods"
 subtitle: 'ICTP Workshop on Mathematical Models of Climate Variability, Environmental Change and Infectious Diseases'
 author: "Aaron A. King"
 date: '8--19 May 2017'
-params:
-  prefix: "mc"
 output:
   html_document:
     toc: yes

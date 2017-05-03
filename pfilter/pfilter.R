@@ -1,13 +1,8 @@
-params <-
-structure(list(prefix = "pfilter"), .Names = "prefix")
-
 #' ---
 #' title: Likelihood for POMP models
 #' subtitle: 'ICTP Workshop on Mathematical Models of Climate Variability, Environmental Change and Infectious Diseases'
 #' author: "Aaron A. King and Edward L. Ionides"
 #' date: "8--19 May 2017"
-#' params:
-#'   prefix: "pfilter"
 #' output:
 #'   html_document:
 #'     toc: yes

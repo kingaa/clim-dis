@@ -1,13 +1,8 @@
-params <-
-structure(list(prefix = "stochsim"), .Names = "prefix")
-
 #' ---
 #' title: "Simulation of stochastic dynamic models"
 #' subtitle: 'ICTP Workshop on Mathematical Models of Climate Variability, Environmental Change and Infectious Diseases'
 #' author: "Aaron A. King and Edward L. Ionides"
 #' date: '8--19 May 2017'
-#' params:
-#'   prefix: 'stochsim'
 #' output:
 #'   html_document:
 #'     toc: yes

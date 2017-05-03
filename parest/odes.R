@@ -1,13 +1,8 @@
-params <-
-structure(list(prefix = "odes"), .Names = "prefix")
-
 #' ---
 #' title: "Working with ordinary differential equations in **pomp**"
 #' subtitle: 'ICTP Workshop on Mathematical Models of Climate Variability, Environmental Change and Infectious Diseases'
 #' author: "Aaron A. King"
 #' date: '8--19 May 2017'
-#' params:
-#'   prefix: "odes"
 #' output:
 #'   html_document:
 #'     toc: yes

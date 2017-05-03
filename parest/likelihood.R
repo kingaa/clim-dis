@@ -1,13 +1,8 @@
-params <-
-structure(list(prefix = "lik"), .Names = "prefix")
-
 #' ---
 #' title: "A brief introduction to the likelihood"
 #' subtitle: 'ICTP Workshop on Mathematical Models of Climate Variability, Environmental Change and Infectious Diseases'
 #' author: "Aaron A. King"
 #' date: '8--19 May 2017'
-#' params:
-#'   prefix: "lik"
 #' output:
 #'   html_document:
 #'     toc: yes

@@ -1,12 +1,7 @@
-params <-
-structure(list(prefix = "intro"), .Names = "prefix")
-
 #' ---
 #' title: "Introduction to partially observed Markov processes"
 #' subtitle: 'ICTP Workshop on Mathematical Models of Climate Variability, Environmental Change and Infectious Diseases'
 #' author: "Aaron A. King"
-#' params:
-#'   prefix: "intro"
 #' output:
 #'   html_document:
 #'     toc: yes

@@ -3,8 +3,6 @@ title: "Template Document"
 subtitle: 'ICTP Workshop on Mathematical Models of Climate Variability, Environmental Change and Infectious Diseases'
 author: "Aaron A. King"
 date: '8--19 May 2017'
-params:
-  prefix: "template"
 output:
   html_document:
     toc: yes
@@ -33,7 +31,8 @@ Please share and remix noncommercially, mentioning its origin.
 
 ```{r knitr-opts,include=FALSE,purl=FALSE}
 library(knitr)
-prefix <- params$prefix
+stop("set the prefix")
+## prefix <- "SETME"
 opts_chunk$set(
   progress=TRUE,
   prompt=FALSE,tidy=FALSE,highlight=TRUE,
