@@ -4,7 +4,7 @@ subtitle: 'ICTP Workshop on Mathematical Models of Climate Variability, Environm
 author: "Aaron A. King"
 date: '8--19 May 2017'
 params:
-  prefix: 'template'
+  prefix: "template"
 output:
   html_document:
     toc: yes

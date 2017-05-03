@@ -99,8 +99,8 @@ The **pomp** package is described and illustrated in
 ### Links
 
 - [**R** Tutorial](http://kingaa.github.io/R_Tutorial)  
-- [Tutorial on data munging with `plyr`, `reshape2`, and `magrittr`](http://kingaa.github.io/clim-dis/hadley/munging.html)  
-- [Tutorial on `ggplot2`](http://kingaa.github.io/clim-dis/hadley/viz.html)  
+- [Tutorial on data munging with `plyr`, `reshape2`, and `magrittr`](http://kingaa.github.io/R_Tutorial/hadley/munging.html)  
+- [Tutorial on `ggplot2`](http://kingaa.github.io/R_Tutorial/hadley/viz.html)  
 - [Source code for these notes](http://github.com/kingaa/clim-dis/)  
 - [**pomp** homepage](http://kingaa.github.io/pomp)  
 

@@ -1,4 +1,4 @@
-MODULES = prep intro stochsim parest pfilter mif measles hadley
+MODULES = prep intro stochsim parest pfilter mif measles
 
 default: index.html modules
 
