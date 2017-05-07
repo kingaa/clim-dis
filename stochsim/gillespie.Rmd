@@ -13,6 +13,20 @@ nocite: |
   @Gardiner2009
 ---
 
+\newcommand\prob[1]{\mathbb{P}\left[{#1}\right]}
+\newcommand\expect[1]{\mathbb{E}\left[{#1}\right]}
+\newcommand\var[1]{\mathrm{Var}\left[{#1}\right]}
+\newcommand\cov[1]{\mathrm{Cov}\left[{#1}\right]}
+\newcommand\dist[2]{\mathrm{#1}\left(#2\right)}
+\newcommand\dlta[1]{{\Delta}{#1}}
+\newcommand{\dd}[1]{\mathrm{d}{#1}}
+\newcommand{\transpose}{\mathrm{T}}
+\newcommand\lik{\mathcal{L}}
+\newcommand\loglik{\ell}
+\newcommand{\scinot}[2]{#1{\times}10^{#2}}
+\newcommand{\pd}[3][]{\frac{\partial^{#1}{#2}}{\partial{#3}^{#1}}}
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}{#2}}{\mathrm{d}{#3}^{#1}}}
+
 Licensed under the Creative Commons attribution-noncommercial license, http://creativecommons.org/licenses/by-nc/3.0/.
 Please share and remix noncommercially, mentioning its origin.  
 ![CC-BY_NC](http://kinglab.eeb.lsa.umich.edu/graphics/cc-by-nc.png)
@@ -581,5 +595,12 @@ simdat <- rdply(
 plot(Y~time,data=simdat,type='n')
 d_ply(simdat,".n",function(x)lines(Y~time,data=x,col=.n))
 ``` 
+
+--------------------------
+
+## [Back to course homepage](../)
+## [**R** codes for this document](http://raw.githubusercontent.com/kingaa/clim-dis/master/stochsim/gillespie.R)
+
+--------------------------
 
 ## References
