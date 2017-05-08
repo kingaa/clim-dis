@@ -67,9 +67,9 @@ Email: kingaaictp5@gmail.com
 
 ### Topics
 
+- [Ordinary differential equation models in **pomp**](parest/odes.html)
 - [Introduction to inference](parest/parest.html)
 - [Brief introduction to likelihood](parest/likelihood.html)
-- [Ordinary differential equation models in **pomp**](parest/odes.html)
 - [Simulation of stochastic processes by Euler's method](stochsim/stochsim.html)
 - [Simulation of stochastic processes by Gillespie's method](stochsim/gillespie.html)
 - [Introduction to partially observed Markov processes](intro/intro.html)
