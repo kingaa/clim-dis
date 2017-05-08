@@ -215,8 +215,8 @@ plot(f~R0,type='l',xlab=expression(R[0]),ylab="fraction infected",bty='l')
 #' To capture the dynamics over the longer term, we'll need to account for births and deaths, i.e., allow the population to be an **open** one.
 #' As we've seen, if we further assume that the birth rate equals the death rate, then the SIR equations become
 #' $$\begin{aligned}
-#' \frac{dS}{dt} &= \mu\,N -\beta\,S\,I-\mu\,S\\
-#' \frac{dI}{dt} &= \beta\,S\,I-\gamma\,I-\mu\,I\\
+#' \frac{dS}{dt} &= \mu\,N-\frac{\beta\,S\,I}{N}-\mu\,S\\
+#' \frac{dI}{dt} &= \frac{\beta\,S\,I}{N}-\gamma\,I-\mu\,I\\
 #' \frac{dR}{dt} &= \gamma\,I-\mu\,R\\
 #' \end{aligned}$$
 #' 
@@ -351,7 +351,7 @@ plot(rainfall~time,data=rain,type='l')
 
 #' 
 #' Let's assume that transmission depends on rainfall, $P$, according to
-#' $$\log\beta(t) = \frac{a\,P(t)}{b+P(t)}$$
+#' $$\beta(t) = \frac{a\,P(t)}{b+P(t)}$$
 #' Since the data are accumulated monthly rainfall figures but the ODE integrator will need to evaluate $P(t)$ at arbitrary times, we'll need some way of interpolating the rainfall data.
 #' **pomp** does this for us, with a straightforward interface.
 #' 
