@@ -1,4 +1,5 @@
-default: parest.R parest.html niamey.csv odes.html odes.R likelihood.html likelihood.R
+default: parest.R parest.html niamey.csv odes.html odes.R likelihood.html likelihood.R dacca_rainfall.csv
+
 ifneq ($(INSTALLDIR),)
 	mkdir -p $(INSTALLDIR)
 	install -m0600 $^ $(INSTALLDIR)
