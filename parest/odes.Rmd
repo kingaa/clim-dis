@@ -356,6 +356,7 @@ Explore the dynamics of the seasonally forced SIR model for increasing amplitude
 Be sure to distinguish between transient and asymptotic dynamics.
 
 --------------------------
+
 #### Forcing with a covariate
 
 When a covariate forces the equations, we must interpolate the covariate.

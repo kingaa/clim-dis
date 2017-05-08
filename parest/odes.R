@@ -336,6 +336,7 @@ ggplot(x,mapping=aes(x=S,y=I))+geom_path()
 #' Be sure to distinguish between transient and asymptotic dynamics.
 #' 
 #' --------------------------
+#' 
 #' #### Forcing with a covariate
 #' 
 #' When a covariate forces the equations, we must interpolate the covariate.
