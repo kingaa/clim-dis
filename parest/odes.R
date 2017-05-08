@@ -130,7 +130,7 @@ ggplot(data=x,mapping=aes(x=time,y=I))+geom_line()
 #' 
 #' --------------------------
 #' 
-#' #### Exercise: conversion of units
+#' ##### Exercise: conversion of units
 #' 
 #' Suppose that you'd rather measure time in years.
 #' Modify the parameters accordingly and verify your modifications.
@@ -143,7 +143,8 @@ ggplot(data=x,mapping=aes(x=time,y=I))+geom_line()
 ## ----nine-curves,echo=FALSE,warning=FALSE,purl=TRUE----------------------
 expand.grid(Beta=c(0.05,1,2),gamma=1/c(1,2,4,8),N=763) -> params2
 
-x <- trajectory(closed.sir,params=t(params2),as=TRUE,times=seq(0,50))
+x <- trajectory(closed.sir,params=t(params2),times=seq(0,50),
+                as.data.frame=TRUE)
 
 library(plyr)
 mutate(params2,traj=seq_along(Beta)) -> params2
@@ -162,7 +163,7 @@ ggplot(data=x,mapping=aes(x=time,y=I,group=traj,
 #' 
 #' --------------------------
 #' 
-#' #### Exercise: exploring the model's dynamical repertoire
+#' ##### Exercise: exploring the model's dynamical repertoire
 #' For each of the above parameter combinations, notice that either an epidemic occurs or the infection fades out.
 #' Can you predict this behavior from a knowledge of the parameters without numerically integrating the equations?
 #' 
@@ -199,7 +200,7 @@ plot(f~R0,type='l',xlab=expression(R[0]),ylab="fraction infected",bty='l')
 #' 
 #' --------------------------
 #' 
-#' #### Exercise: final size
+#' ##### Exercise: final size
 #' 
 #' Use `trajectory` to study the dependence of $f$ on $R_0$.
 #' Compare your results with the predictions of the final size equation
@@ -262,14 +263,14 @@ ggplot(data=x,mapping=aes(x=S,y=I))+geom_path()
 #' 
 #' --------------------------
 #' 
-#' #### Exercise: exploring the model's dynamical repertoire
+#' ##### Exercise: exploring the model's dynamical repertoire
 #' Explore the dynamics of the system for different values of the $\beta$ and $\gamma$ parameters by simulating and plotting trajectories as time series and in phase space (e.g., $I$ vs. $S$).
 #' Use the same values of $\beta$ and $\gamma$ we looked at above.
 #' How does the value of $R_0$ affect the results?
 #' 
 #' --------------------------
 #' 
-#' #### Exercise: host lifespan
+#' ##### Exercise: host lifespan
 #' Under the assumptions of this model, the average host lifespan is $1/\mu$.  
 #' Explore how host lifespan affects the dynamics by integrating the differential equations for lifespans of 20 and 200 years.
 #' 
@@ -278,7 +279,7 @@ ggplot(data=x,mapping=aes(x=S,y=I))+geom_path()
 #' 
 #' --------------------------
 #' 
-#' #### Exercise: SIRS model
+#' ##### Exercise: SIRS model
 #' The SIR model assumes lifelong sterilizing immunity following infection.
 #' For many infections, immunity is not permanent.
 #' Make a compartment diagram for an SIRS model, in which individuals lose their immunity after some time.
@@ -287,7 +288,7 @@ ggplot(data=x,mapping=aes(x=S,y=I))+geom_path()
 #' 
 #' --------------------------
 #' 
-#' #### Exercise: SEIR model
+#' ##### Exercise: SEIR model
 #' Make a diagram, write the equations, and study the dynamics of the SEIR model for the dynamics of an infection with a latent period.
 #' Compare the dynamics of SIR and SEIR models for the parameters $\mu=1/50$, $\gamma=365/5$, $\beta=1000$ and assuming that, in the SEIR model, the latent period has duration 8 days.
 #' 
@@ -330,12 +331,60 @@ ggplot(x,mapping=aes(x=S,y=I))+geom_path()
 #' 
 #' --------------------------
 #' 
-#' #### Exercise: exploration
+#' ##### Exercise: exploration
 #' Explore the dynamics of the seasonally forced SIR model for increasing amplitude $\beta_1$.
 #' Be sure to distinguish between transient and asymptotic dynamics.
 #' 
 #' --------------------------
+#' #### Forcing with a covariate
 #' 
+#' When a covariate forces the equations, we must interpolate the covariate.
+#' To give an example, let's suppose that the transmission rate depends on rainfall, $R(t)$, and that we have data on rainfall (in mm/mo).
+## ----dacca-rain,cache=T--------------------------------------------------
+rain <- read.csv("http://kingaa.github.io/clim-dis/parest/dacca_rainfall.csv")
+rain$time <- with(rain,year+(month-1)/12)
+plot(rainfall~time,data=rain,type='l')
+
+rain$time <- with(rain,time-1920)
+plot(rainfall~time,data=rain,type='l')
+
+#' 
+#' Let's assume that transmission depends on rainfall, $P$, according to
+#' $$\log\beta(t) = \frac{a\,P(t)}{b+P(t)}$$
+#' Since the data are accumulated monthly rainfall figures but the ODE integrator will need to evaluate $P(t)$ at arbitrary times, we'll need some way of interpolating the rainfall data.
+#' **pomp** does this for us, with a straightforward interface.
+#' 
+## ----rainfall-sir,cache=TRUE---------------------------------------------
+rainfall.sir.ode <- Csnippet("
+  double Beta = a*rainfall/(b+rainfall);
+  DS = -Beta*S*I/N+mu*(N-S);
+  DI =  Beta*S*I/N-gamma*I-mu*I;
+  DR =  gamma*I-mu*R;
+")
+
+window(open.sir,end=10) -> rf.sir
+
+pomp(rf.sir,
+     t0=0,
+     skeleton=vectorfield(rainfall.sir.ode),
+     initializer=init2,
+     covar=rain, tcovar="time",
+     statenames=c("S","I","R"),
+     paramnames=c("a","b","gamma","mu","N","S_0","I_0")
+) -> rf.sir
+
+params5 <- c(mu=1/50,a=500,b=100,gamma=26,
+             N=1e5,S_0=8000,I_0=5)
+
+trajectory(rf.sir,params=params5,as.data.frame=TRUE) -> x
+
+library(ggplot2)
+ggplot(x,mapping=aes(x=time,y=I))+geom_path()
+ggplot(x,mapping=aes(x=time,y=I))+geom_path()+scale_y_log10()
+
+#' 
+#' 
+#' -----------------------------
 #' 
 #' ## [Back to course homepage](../)
 #' ## [**R** codes for this document](http://raw.githubusercontent.com/kingaa/clim-dis/master/parest/odes.R)
