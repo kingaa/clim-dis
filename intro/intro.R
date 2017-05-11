@@ -497,13 +497,13 @@ lines(N~time,data=traj,type='l',col='red')
 #' 
 #' --------------------------
 #' 
-#' #### Exercise: Ricker model parameters
+#' ##### Exercise: Ricker model parameters
 #' Fiddle with the parameters to try and make the simulations look more like the data.
 #' This will help you build some intuition for what the various parameters do.
 #' 
 #' --------------------------
 #' 
-#' #### Exercise: Reformulating the Ricker model
+#' ##### Exercise: Reformulating the Ricker model
 #' Reparameterize the Ricker model so that the scaling of $N$ is explicit:
 #' $$N_{t+1} = r\,N_{t}\,\exp\left(-\frac{N_{t}}{K}+\varepsilon_t\right).$$
 #' 
@@ -516,7 +516,7 @@ lines(N~time,data=traj,type='l',col='red')
 #' 
 #' --------------------------
 #' 
-#' #### Exercise: Beverton-Holt
+#' ##### Exercise: Beverton-Holt
 #' Construct a `pomp` object for the *Parus major* data and the stochastic Beverton-Holt model
 #' $$N_{t+1} = \frac{a\,N_t}{1+b\,N_t}\,\varepsilon_t,$$
 #' where $a$ and $b$ are parameters and

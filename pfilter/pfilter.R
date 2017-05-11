@@ -340,7 +340,7 @@ p %>%
 #' 
 #' ------------------------
 #' 
-#' #### Exercise: Likelihood slice
+#' ##### Exercise: Likelihood slice
 #' 
 #' Add likelihood slices along the $\rho$ direction.
 #' 
@@ -391,7 +391,7 @@ p %>%
 #' 
 #' ------------------------
 #' 
-#' #### Exercise: 2D likelihood slice
+#' ##### Exercise: 2D likelihood slice
 #' 
 #' Compute a slice of the likelihood in the $\beta$-$\rho$ plane.
 #' 
@@ -434,7 +434,7 @@ p %>%
 #' 
 #' --------------------------
 #' 
-#' #### Exercise: AIC as a formal statistical test
+#' ##### Exercise: AIC as a formal statistical test
 #' 
 #' Determine the size of AIC as a hypothesis test for nested hypotheses with $d=1$ in a regular parametric situation. 
 #' 
@@ -576,13 +576,13 @@ ggplot(data=sims,mapping=aes(x=time,y=B,group=sim,color=sim=="data"))+
 #' 
 #' --------------------------
 #' 
-#' #### Exercise: More slices
+#' ##### Exercise: More slices
 #' 
 #' Construct likelihood slices through the MLE we just found.
 #' 
 #' --------------------------
 #' 
-#' #### Exercise: Visualizing the likelihood surface
+#' ##### Exercise: Visualizing the likelihood surface
 #' 
 #' Evaluate the likelihood at points on a grid lying in a 2D slice through the MLE we found above.
 #' Each group should choose a different slice.
@@ -590,7 +590,7 @@ ggplot(data=sims,mapping=aes(x=time,y=B,group=sim,color=sim=="data"))+
 #' 
 #' --------------------------
 #' 
-#' #### Exercise: Global maximization
+#' ##### Exercise: Global maximization
 #' 
 #' The search of parameter space we conducted above was local.
 #' It is possible that we found a local maximum, but that other maxima exist with higher likelihoods.
@@ -599,14 +599,14 @@ ggplot(data=sims,mapping=aes(x=time,y=B,group=sim,color=sim=="data"))+
 #' 
 #' --------------------------
 #' 
-#' #### Exercise: Modify the measurement model
+#' ##### Exercise: Modify the measurement model
 #' 
 #' The Poisson measurement model used here may not seem easy to interpret.
 #' Formulate an alternative measurement model and maximize the likelihood to compare the alternative model.
 #' 
 #' --------------------------
 #' 
-#' #### Exercise: Fit more parameters.
+#' ##### Exercise: Fit more parameters.
 #' 
 #' Try to estimate $\beta$, $\mu_I$, $\rho$, and $\mu_{R1}$ simultaneously.
 #' Does your estimate of $\mu_{R1}$ differ from the value we computed from the raw data?
