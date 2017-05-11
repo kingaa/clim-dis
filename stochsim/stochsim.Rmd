@@ -392,14 +392,13 @@ We do this by setting the `zeronames` argument to `pomp`:
 pomp(sir,zeronames="H") -> sir
 ```
 
-Now, to include the observations in the model, we must write both a `dmeasure` and an `rmeasure` component:
+Now, to include the observations in the model, we must write an `rmeasure` component:
 ```{r meas-model}
-dmeas <- Csnippet("lik = dbinom(B,H,rho,give_log);")
 rmeas <- Csnippet("B = rbinom(H,rho);")
 ```
 and put these into our `pomp` object:
 ```{r add-meas-model}
-sir <- pomp(sir,rmeasure=rmeas,dmeasure=dmeas,statenames="H",paramnames="rho")
+sir <- pomp(sir,rmeasure=rmeas,statenames="H",paramnames="rho")
 ```
 
 ### Testing the model: simulations

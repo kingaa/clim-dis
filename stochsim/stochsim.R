@@ -349,14 +349,13 @@ pomp(sir,rprocess=euler.sim(sir_step,delta.t=1/6),initializer=sir_init,
 pomp(sir,zeronames="H") -> sir
 
 #' 
-#' Now, to include the observations in the model, we must write both a `dmeasure` and an `rmeasure` component:
+#' Now, to include the observations in the model, we must write an `rmeasure` component:
 ## ----meas-model----------------------------------------------------------
-dmeas <- Csnippet("lik = dbinom(B,H,rho,give_log);")
 rmeas <- Csnippet("B = rbinom(H,rho);")
 
 #' and put these into our `pomp` object:
 ## ----add-meas-model------------------------------------------------------
-sir <- pomp(sir,rmeasure=rmeas,dmeasure=dmeas,statenames="H",paramnames="rho")
+sir <- pomp(sir,rmeasure=rmeas,statenames="H",paramnames="rho")
 
 #' 
 #' ### Testing the model: simulations

@@ -1,4 +1,4 @@
-default: stochsim.R stochsim.html bsflu_data.txt gillespie.html gillespie.R
+default: stochsim.R stochsim.html bsflu_data.txt gillespie.html gillespie.R sir3_soln.R
 ifneq ($(INSTALLDIR),)
 	mkdir -p $(INSTALLDIR)
 	install -m0600 $^ $(INSTALLDIR)
