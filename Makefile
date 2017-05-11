@@ -1,6 +1,6 @@
 MODULES = prep intro stochsim parest pfilter mif
 
-default: index.html modules
+default: index.html TODO.html modules 
 
 modules:
 	for module in $(MODULES); do ($(MAKE) -C $$module); done
