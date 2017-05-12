@@ -1,5 +1,5 @@
 #' ---
-#' title: "Simulation of birth-death processes"
+#' title: "Exact simulation of birth-death processes via the Gillespie algorithm"
 #' subtitle: 'ICTP Workshop on Mathematical Models of Climate Variability, Environmental Change and Infectious Diseases'
 #' author: "Aaron A. King"
 #' date: '8--19 May 2017'
@@ -29,7 +29,7 @@
 #' 
 #' Licensed under the Creative Commons attribution-noncommercial license, http://creativecommons.org/licenses/by-nc/3.0/.
 #' Please share and remix noncommercially, mentioning its origin.  
-#' ![CC-BY_NC](http://kinglab.eeb.lsa.umich.edu/graphics/cc-by-nc.png)
+#' ![CC-BY_NC](../graphics/cc-by-nc.png)
 #' 
 ## ----include=FALSE,cache=FALSE-------------------------------------------
 library(knitr)
@@ -176,7 +176,7 @@ for (k in 1:nsims)
   lines(Y~time,data=simdat[[k]],col=k,type='o',pch=16)
 
 #' 
-#' #### Exercise
+#' ##### Exercise
 #'   Simulate the stochastic SI model using Gillespie's direct method. 
 #'   Experiment with the initial number of infecteds ($Y_0$) and with the total population size ($N$). 
 #'   What effects do these have on the predictability of the epidemic? 
@@ -287,50 +287,79 @@ plot(Y~time,data=simdat,type='n')
 d_ply(simdat,".n",function(x)lines(Y~time,data=x,col=.n))
 
 #' 
-#' #### Exercise
+#' ##### Exercise
 #'   Check out the `simdat` data frame created by the above code.
 #'   Use `class`, `head`, `tail`, `str`, and `plot` to examine it.
 #' 
 #' 
-#' #### Exercise
+#' ##### Exercise
 #'   Simulate the stochastic SIR model using Gillespie's direct method. 
 #'   As before, experiment with the initial number of infecteds ($Y_0$) and with the total population size ($N$). 
 #'   What effects do these have on the predictability of the epidemic?
 #' 
 #' 
-#' ### Alternative implementation
+#' ## The Gillespie algorithm in **pomp**
 #' 
-#' An alternative implementation of the codes above will return the results at specified time-points.
+#' We can achieve much faster speeds using the implementation of Gillespie's algorithm in **pomp**.
 #' 
-## ----sir-sim-alt,cache=FALSE---------------------------------------------
-SIR.simul.alt <- function (x, params, times) {
-  output <- array(dim=c(length(times),4),dimnames=list(NULL,names(x)))
-  t <- x[1]
-  stopifnot(t<=times[1])
-  ## loop until either k > maxstep or
-  ## there are no more infectives
-  k <- 1
-  while (k <= length(times)) {
-    while (t < times[k]) {
-      x <- SIR.onestep(x,params)
-      t <- x[1]
-    }
-    while (t >= times[k] && k <= length(times)) {
-      output[k,] <- x
-      k <- k+1
-    }
-  }
-  as.data.frame(output)
-}
+#' The following codes implement the SIR simulation above in **pomp**.
+#' 
+## ----pomp----------------------------------------------------------------
+library(pomp)
 
-## ----test-simul-alt,cache=FALSE,results='markup',include=FALSE-----------
-xstart <- c(time=0,X=392,Y=8,Z=0)
-params <- c(mu=0.02,beta=60,gamma=365/13)
-times <- seq(from=0,to=0.5,by=0.001)
-x <- SIR.simul.alt(xstart,times=times,params=params)
-print(x[1,])
-matplot(x[,1],x[,-1],type='l')
+pomp(data=data.frame(
+  time=seq(0.01,0.5,by=0.01),
+  reports=NA),
+  times="time",t0=0,
+  rprocess=gillespie.sim(
+    v=cbind(
+      birth=c(1,0,0,1,0),
+      sdeath=c(-1,0,0,-1,0),
+      infection=c(-1,1,0,0,0),
+      ideath=c(0,-1,0,-1,0),
+      recovery=c(0,-1,1,0,1),
+      rdeath=c(0,0,-1,-1,0)
+    ),
+    rate.fun=function(j,x,t,params,...) {
+      N <- sum(x[c("X","Y","Z")])
+      switch(j,
+             params["mu"]*N,
+             params["mu"]*x["X"],
+             params["beta"]*x["X"]*x["Y"]/N,
+             params["mu"]*x["Y"],
+             params["gamma"]*x["Y"],
+             params["mu"]*x["Z"]
+      )
+    },
+    d=cbind(
+      birth=c(0,0,0,1,0),
+      sdeath=c(1,0,0,0,0),
+      infection=c(1,1,0,1,0),
+      ideath=c(0,1,0,0,0),
+      recovery=c(0,1,0,0,0),
+      rdeath=c(0,0,1,0,0)
+    )
+  ),
+  rmeasure=Csnippet("reports=rbinom(cases,rho);"),
+  paramnames="rho",
+  statenames=c("cases"),
+  zeronames=c("cases"),
+  params=c(X.0=392,Y.0=8,Z.0=0,pop.0=400,cases.0=0,
+           mu=0.02,beta=60,gamma=365/13,rho=0.5)
+) -> sir
 
+simulate(sir,nsim=10,as.data.frame=TRUE) -> sims
+
+library(ggplot2)
+library(reshape2)
+ggplot(melt(sims,id=c("time","sim")),
+       aes(x=time,y=value,group=sim,color=sim))+
+  geom_line()+
+  guides(color=FALSE)+
+  facet_grid(variable~.,scales="free_y")
+    
+
+#' 
 #' 
 #' ## Exploring the vicinity of the $R_0=1$ threshold
 #' 
@@ -344,91 +373,61 @@ matplot(x[,1],x[,-1],type='l')
 #' 
 ## ----crit-sims,cache=T---------------------------------------------------
 R0vals <- c(0.5,3)                      # R0 values to explore
-xstart <- c(time=0,X=392,Y=8,Z=0)
-params <- c(mu=0.02,beta=60,gamma=365/13) #parameters
-nsims <- 100                      # number of simulations per R0 value
-simdat <- array(dim=c(length(R0vals),nsims))
-for (k in seq_along(R0vals)) {
-  R0 <- R0vals[k]
-  params <- c(mu=1/60,gamma=365/13,beta=R0*365/13)
-  simdat[k,] <- replicate(n=nsims,
-                          {
-                            sim <- SIR.simul(xstart,params)
-                            tail(sim$Z,1)
-                          }
-                          )
-}
+params <- c(mu=0.02,beta=NA,gamma=365/13,rho=0.5,
+            X.0=392,Y.0=8,Z.0=0,
+            pop.0=0,cases.0=0) 
+
+library(foreach)
+library(doParallel)
+registerDoParallel()
+
+foreach (R0=R0vals) %dopar% {
+  params["beta"] <- R0*365/13
+  simulate(sir,params=params,nsim=100,as.data.frame=TRUE) -> sims
+  cbind(sims,R0=R0)
+} -> simdat
+
+library(plyr)
+ldply(simdat) -> simdat
+
+subset(simdat,time==max(time),select=c(Z,R0)) -> simfs
 
 #' 
 #' We can plot these distributions using histograms.
 ## ----crit-sims-hist,results='markup'-------------------------------------
-binwidth <- 10
-popsize <- sum(xstart[-1])
-breaks <- seq(from=0,to=popsize,by=binwidth)
-hists <- apply(simdat,1,hist,breaks=breaks,plot=FALSE)
-midpoints <- hists[[1]]$mids
-counts <- sapply(hists,function(x)x$counts)
-prob <- sapply(hists,function(x)x$density)
-
-barplot(height=t(prob),width=binwidth,names=midpoints,
-        beside=T,col=seq_along(R0vals),
-        xlab="epidemic final size")
-legend("top",legend=R0vals,fill=seq_along(R0vals),
-       title=expression(R[0]),bty='n')
+ggplot(simfs,aes(x=Z,fill=R0,group=R0))+
+  geom_histogram(binwidth=10)+
+  labs(x="final size")
 
 #' 
-#' Just for fun, let's make a similar plot using `plyr`, `reshape2`, and `ggplot2`.
-## ----crit-sims-hist-ggplot,cache=T---------------------------------------
-require(ggplot2)
-require(reshape2)
-
-rownames(simdat) <- R0vals
-simdat2 <- melt(simdat,
-                varnames=c("R0","rep"),
-                value.name="finalsize"
-                )
-ggplot(data=simdat2,mapping=aes(x=finalsize,group=R0))+
-  geom_histogram(binwidth=10,color=NA,position='dodge')+
-  facet_grid(R0~.,labeller=label_bquote(R[0]==.(x)))
-
-#' 
-#' #### Exercise
+#' ##### Exercise
 #'   Use the codes above to explore the final size in a neighborhood of the critical threshold.
 #'   How do the results from the deterministic and stochastic models differ?
 #' 
 #' 
 ## ----crit-explore-exercise,cache=TRUE,include=FALSE----------------------
 R0vals <- seq(0.8,1.4,by=0.05)
-xstart <- c(time=0,X=392,Y=8,Z=0)
-nsims <- 1000
-data <- array(dim=c(length(R0vals),nsims))
-for (k in seq_along(R0vals)) {
-  R0 <- R0vals[k]
-  params <- c(mu=1/60,gamma=365/13,beta=R0*365/13)
-  data[k,] <- replicate(n=nsims,
-                        {
-                          sim <- SIR.simul(xstart,params)
-                          tail(sim$Z,1)
-                        }
-                        )
-}
-medians <- apply(data,1,median)
-means <- apply(data,1,mean)
-sds <- apply(data,1,sd)
-matplot(R0vals,cbind(mean=means,sd=sds,median=medians),
-        xlab=expression(R[0]),ylab="number of infections",
-        type='n')
-lines(R0vals,means,col='red')
-lines(R0vals,sds,col='blue')
-lines(R0vals,medians,col='black')
-legend("topleft",
-       lty=1,col=c("red","blue","black"),
-       legend=c("mean","sd","median"),
-       title="epidemic final size",
-       bty='n')
+library(foreach)
+library(doParallel)
+registerDoParallel()
+
+foreach (R0=R0vals) %dopar% {
+  params["beta"] <- R0*365/13
+  simulate(sir,params=params,nsim=500,as.data.frame=TRUE) -> sims
+  cbind(sims,R0=R0)
+} -> simdat
+
+library(plyr)
+ldply(simdat) -> simdat
+
+subset(simdat,time==max(time),select=c(Z,R0)) -> simfs
+ggplot(simfs,aes(x=Z,group=R0))+
+  geom_histogram(binwidth=10,aes(y=..density..))+
+  labs(x="final size")+
+  facet_grid(R0~.)
 
 #' 
-#' #### Exercise
+#' ##### Exercise
 #'   Use the stochastic simulator to generate some "data" for known parameter values: $R_0=2$, infectious period of 13~da, host lifespan of 50~yr.
 #'   Estimate $R_0$ for each simulated epidemic using the invasion-phase growth rate method.
 #'   Estimate $R_0$ and $\gamma$ using the trajectory-matching approach.
@@ -451,9 +450,7 @@ legend("topleft",
 #' 
 #' --------------------------
 #' 
-#' **Diagram of the SIR model**
-#' 
-#' ![CC-BY_NC](http://kinglab.eeb.lsa.umich.edu/ICTPWID/SaoPaulo_2015/Aaron/graphics/SIR_diagram1.png)
+#' ![Diagram of the SIR model](../graphics/SIR_diagram1.png)
 #' 
 #' $N_{XY}$ represents the cumulative number of individuals that have moved beetween compartments X and Y.
 #' 
