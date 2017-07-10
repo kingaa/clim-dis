@@ -245,7 +245,7 @@ pomp(data=data.frame(time=seq(0,20,by=1/52),cases=NA),
 #' 
 #' We'll need to specify a birth/death rate in addition to the two parameters we specified before:
 ## ----set-open-params-----------------------------------------------------
-params3 <- c(mu=1/50,Beta=400,gamma=13,
+params3 <- c(mu=1/50,Beta=400,gamma=365/13,
   N=100000,S_0=100000/12,I_0=100)
 
 #' We integrate the equations as before:
@@ -319,7 +319,7 @@ pomp(open.sir,
      paramnames=c("beta0","beta1","gamma","mu","N","S_0","I_0")
 ) -> seas.sir
 
-params4 <- c(mu=1/50,beta0=400,beta1=0.15,gamma=26,
+params4 <- c(mu=1/50,beta0=400,beta1=0.15,gamma=28,
              N=1e5,S_0=7000,I_0=50)
 
 trajectory(seas.sir,params=params4,as=TRUE) -> x
