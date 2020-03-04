@@ -34,7 +34,8 @@
 #' 
 #' Produced in **R** version `r getRversion()` using **pomp** version `r packageVersion("pomp")`.
 #' 
-## ----opts,include=FALSE,cache=FALSE--------------------------------------
+
+## ----opts,include=FALSE,cache=FALSE-------------------------------------------
 options(stringsAsFactors=FALSE)
 library(ggplot2)
 theme_set(theme_bw())
@@ -108,6 +109,7 @@ set.seed(2028866059L)
 #'    
 #' ![](pomp_schematic1.png)
 #' 
+
 #' 
 #' **The key perspective to keep in mind is that the model is to be viewed as the process that generated the data.**
 #' 
@@ -141,6 +143,7 @@ set.seed(2028866059L)
 #' 
 #' showing dependence among model variables:
 #' 
+
 #' 
 #' The state process, $X_n$, is Markovian, i.e.,
 #' $$\prob{X_n|X_0,\dots,X_{n-1},Y_1,\dots,Y_{n-1}}=\prob{X_n|X_{n-1}}.$$
@@ -226,97 +229,97 @@ set.seed(2028866059L)
 #' 
 #' Let's see what can be done with a `pomp` object.
 #' First, we'll load some packages, including **pomp**.
-## ----prelims,cache=F-----------------------------------------------------
+## ----prelims,cache=F----------------------------------------------------------
 library(ggplot2)
 library(plyr)
 library(reshape2)
 library(pomp)
-stopifnot(packageVersion("pomp")>="1.4.9")
+stopifnot(packageVersion("pomp")>="2.4")
 
 #' 
 #' A pre-built `pomp` object encoding the Ricker model comes included with the package.
-#' Load it by
-## ----load-ricker,cache=FALSE,results="hide"------------------------------
-pompExample(ricker)
+#' Construct it by executing
+## ----load-ricker,cache=FALSE,results="hide"-----------------------------------
+ricker() -> rick
 
-#' This has the effect of creating a `pomp` object named `ricker` in your workspace.
+#' This has the effect of creating a `pomp` object named `rick` in your workspace.
 #' We can plot the data by doing
-## ----plot-ricker---------------------------------------------------------
-plot(ricker)
+## ----plot-ricker--------------------------------------------------------------
+plot(rick)
 
 #' We can simulate by doing
-## ----sim-ricker1---------------------------------------------------------
-x <- simulate(ricker)
+## ----sim-ricker1--------------------------------------------------------------
+x <- simulate(rick)
 
 #' What kind of object have we created?
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 class(x)
 plot(x)
 
 #' Why do we see more time series in the simulated `pomp` object?
 #' 
 #' We can turn a `pomp` object into a data frame:
-## ------------------------------------------------------------------------
-y <- as.data.frame(ricker)
+## -----------------------------------------------------------------------------
+y <- as.data.frame(rick)
 head(y)
-head(simulate(ricker,as.data.frame=TRUE))
+head(simulate(rick,format="data.frame"))
 
 #' 
 #' We can also run multiple simulations simultaneously:
-## ------------------------------------------------------------------------
-x <- simulate(ricker,nsim=10)
+## -----------------------------------------------------------------------------
+x <- simulate(rick,nsim=10)
 class(x)
 sapply(x,class)
-x <- simulate(ricker,nsim=10,as.data.frame=TRUE)
+x <- simulate(rick,nsim=10,format="data.frame")
 head(x)
 str(x)
 
 #' Also,
-## ----fig.height=8--------------------------------------------------------
-x <- simulate(ricker,nsim=9,as.data.frame=TRUE,include.data=TRUE)
-ggplot(data=x,aes(x=time,y=y,group=sim,color=(sim=="data")))+
+## ----fig.height=8-------------------------------------------------------------
+x <- simulate(rick,nsim=9,format="d",include.data=TRUE)
+ggplot(data=x,aes(x=time,y=y,group=.id,color=(.id=="data")))+
   geom_line()+guides(color=FALSE)+
-  facet_wrap(~sim,ncol=2)
+  facet_wrap(~.id,ncol=2)
 
 #' 
 #' We refer to the deterministic map as the "skeleton" of the stochastic map.
 #' We can compute a trajectory of the the deterministic skeleton using `trajectory`:
-## ----traj-ricker---------------------------------------------------------
-y <- trajectory(ricker)
+## ----traj-ricker--------------------------------------------------------------
+y <- trajectory(rick)
 dim(y)
 dimnames(y)
-plot(time(ricker),y["N",1,],type="l")
+plot(time(rick),y["N",1,],type="l")
 
 #' 
-#' Notice that `ricker` has parameters associated with it:
-## ----coef-ricker---------------------------------------------------------
-coef(ricker)
+#' Notice that `rick` has parameters associated with it:
+## ----coef-ricker--------------------------------------------------------------
+coef(rick)
 
 #' These are the parameters at which the simulations and deterministic trajectory computations above were done.
 #' We can run these at different parameters:
-## ------------------------------------------------------------------------
-theta <- coef(ricker)
+## -----------------------------------------------------------------------------
+theta <- coef(rick)
 theta[c("r","N.0")] <- c(5,3)
-y <- trajectory(ricker,params=theta)
-plot(time(ricker),y["N",1,],type="l")
-x <- simulate(ricker,params=theta)
+y <- trajectory(rick,params=theta)
+plot(time(rick),y["N",1,],type="l")
+x <- simulate(rick,params=theta)
 plot(x,var="y")
 
 #' 
-#' We can also change the parameters stored inside of `ricker`:
-## ------------------------------------------------------------------------
-coef(ricker,c("r","N.0","sigma")) <- c(39,0.5,1)
-coef(ricker)
-plot(simulate(ricker),var="y")
+#' We can also change the parameters stored inside of `rick`:
+## -----------------------------------------------------------------------------
+coef(rick,c("r","N.0","sigma")) <- c(39,0.5,1)
+coef(rick)
+plot(simulate(rick),var="y")
 
 #' 
 #' In all of the above, it's possible to work with more than one set of parameters at a time.
 #' For example:
-## ----bifdiag-------------------------------------------------------------
-p <- parmat(coef(ricker),500)
+## ----bifdiag------------------------------------------------------------------
+p <- parmat(coef(rick),500)
 dim(p); dimnames(p)
 p["r",] <- seq(from=2,to=40,length=500)
-y <- trajectory(ricker,params=p,times=200:1000)
+y <- trajectory(rick,params=p,times=200:1000)
 matplot(p["r",],y["N",,],pch=".",col='black',xlab='r',ylab='N',log='x')
 
 #' 
@@ -328,6 +331,7 @@ matplot(p["r",],y["N",,],pch=".",col='black',xlab='r',ylab='N',log='x')
 #' There are a number of other examples included with the package.
 #' Do `pompExample()` to see a list of these.
 #' More examples can be found in the **pompExamples** package:
+
 #' 
 #' ### Inference algorithms in **pomp**
 #' 
@@ -337,8 +341,8 @@ matplot(p["r",],y["N",,],pch=".",col='black',xlab='r',ylab='N',log='x')
 #' The `pfilter` function runs a simple particle filter.
 #' It can be used to evaluate the likelihood at a particular set of parameters.
 #' One uses the `Np` argument to specify the number of particles to use:
-## ----pfilter1------------------------------------------------------------
-pf <- pfilter(ricker,Np=1000)
+## ----pfilter1-----------------------------------------------------------------
+pf <- pfilter(rick,Np=1000)
 class(pf)
 plot(pf)
 logLik(pf)
@@ -348,7 +352,7 @@ logLik(pf)
 #' This is the general rule: inference algorithms return objects that are `pomp` objects with additional information.
 #' The package provides tools to extract this information.
 #' We can run the particle filter again by doing
-## ----pfilter2------------------------------------------------------------
+## ----pfilter2-----------------------------------------------------------------
 pf <- pfilter(pf)
 logLik(pf)
 
@@ -359,7 +363,7 @@ logLik(pf)
 #' Any additional arguments we add override these defaults.
 #' This is the general rule in **pomp**.
 #' For example,
-## ----pfilter3------------------------------------------------------------
+## ----pfilter3-----------------------------------------------------------------
 pf <- pfilter(pf,Np=100)
 logLik(pf)
 
@@ -371,7 +375,7 @@ logLik(pf)
 #' We'll illustrate this process a dataset of *Parus major* abundance in Wytham Wood, near Oxford [@McCleery1991].
 #' 
 #' Download and plot the data:
-## ----parus-data----------------------------------------------------------
+## ----parus-data---------------------------------------------------------------
 dat <- read.csv("http://kingaa.github.io/clim-dis/intro/parus.csv")
 head(dat)
 plot(pop~year,data=dat,type='o')
@@ -388,7 +392,7 @@ plot(pop~year,data=dat,type='o')
 #' there you have access to the complete source code, tutorials, manuals, issues page, news blog, etc.
 #' 
 #' Now, to construct our `pomp` object:
-## ----parus-pomp1---------------------------------------------------------
+## ----parus-pomp1--------------------------------------------------------------
 library(pomp)
 parus <- pomp(dat,times="year",t0=1959)
 
@@ -396,7 +400,7 @@ parus <- pomp(dat,times="year",t0=1959)
 #' `t0` is the "zero-time", the time at which the state process will be initialized.
 #' We've set it to one year prior to the beginning of the data.
 #' Plot the new `pomp` object:
-## ----parus-plot1---------------------------------------------------------
+## ----parus-plot1--------------------------------------------------------------
 plot(parus)
 
 #' 
@@ -405,7 +409,7 @@ plot(parus)
 #' We can add the stochastic Ricker model to `parus` by writing a Csnippet that simulates one realization of the stochastic process, from an arbitary time $t$ to $t+1$, given arbitrary states and parameters.
 #' We provide this to `pomp` in the form of a `Csnippet`, a little snippet of C code that performs the computation.
 #' The following does this.
-## ----parus-sim-defn------------------------------------------------------
+## ----parus-sim-defn-----------------------------------------------------------
 stochStep <- Csnippet("
   e = rnorm(0,sigma);
   N = r*N*exp(-N+e);
@@ -421,10 +425,9 @@ pomp(parus,rprocess=discrete.time.sim(step.fun=stochStep,delta.t=1),
 #' We specify that the time step of the discrete-time process is `delta.t`, here, 1&nbsp;yr.
 #' 
 #' At this point, we have what we need to simulate the state process:
-## ----ricker-first-sim----------------------------------------------------
-sim <- simulate(parus,params=c(N.0=1,e.0=0,r=12,sigma=0.5),
-                as.data.frame=TRUE,states=TRUE)
-plot(N~time,data=sim,type='o')
+## ----ricker-first-sim---------------------------------------------------------
+sim <- simulate(parus,params=c(N.0=1,e.0=0,r=12,sigma=0.5),format="d")
+plot(N~year,data=sim,type='o')
 
 #' 
 #' #### Adding in the measurement model and parameters
@@ -432,29 +435,29 @@ plot(N~time,data=sim,type='o')
 #' We complete the specification of the POMP by specifying the measurement model.
 #' To obtain the Poisson measurement model described above, we write two Csnippets.
 #' The first simulates:
-## ----parus-rmeas-defn----------------------------------------------------
+## ----parus-rmeas-defn---------------------------------------------------------
 rmeas <- Csnippet("pop = rpois(phi*N);")
 
 #' The second computes the likelihood of observing `pop` birds given a true density of `N`:
-## ----parus-dmeas-defn----------------------------------------------------
+## ----parus-dmeas-defn---------------------------------------------------------
 dmeas <- Csnippet("lik = dpois(pop,phi*N,give_log);")
 
 #' [Note the `give_log` argument.
 #' When this code is evaluated, `give_log` will be set to 1 if the log likelihood is desired, and 0 else.]
 #' We add these into the `pomp` object:
-## ----parus-add-meas------------------------------------------------------
+## ----parus-add-meas-----------------------------------------------------------
 pomp(parus,rmeasure=rmeas,dmeasure=dmeas,statenames=c("N"),paramnames=c("phi")) -> parus
 
 #' Now we can simulate the whole POMP.
 #' First, let's add some parameters:
-## ----ricker-add-params---------------------------------------------------
+## ----ricker-add-params--------------------------------------------------------
 coef(parus) <- c(N.0=1,e.0=0,r=20,sigma=0.1,phi=200)
 
-## ----ricker-second-sim,results='markup'----------------------------------
+## ----ricker-second-sim,results='markup'---------------------------------------
 library(ggplot2)
-sims <- simulate(parus,nsim=3,as.data.frame=TRUE,include.data=TRUE)
-ggplot(data=sims,mapping=aes(x=time,y=pop))+geom_line()+
-  facet_wrap(~sim,ncol=1,scales="free_y")
+sims <- simulate(parus,nsim=3,format="d",include.data=TRUE)
+ggplot(data=sims,mapping=aes(x=year,y=pop))+geom_line()+
+  facet_wrap(~.id,ncol=1,scales="free_y")
 
 #' 
 #' #### Adding in the deterministic skeleton
@@ -463,11 +466,11 @@ ggplot(data=sims,mapping=aes(x=time,y=pop))+geom_line()+
 #' Since the Ricker model is a discrete-time model, its skeleton is a map that takes $N_t$ to $N_{t+1}$ according to the Ricker model equation
 #' $$N_{t+1} = r\,N_{t}\,\exp(-N_{t}).$$
 #' The following implements this.
-## ----parus-skel-defn-----------------------------------------------------
+## ----parus-skel-defn----------------------------------------------------------
 skel <- Csnippet("DN = r*N*exp(-N);")
 
 #' We then add this to the `pomp` object:
-## ----parus-add-skel------------------------------------------------------
+## ----parus-add-skel-----------------------------------------------------------
 parus <- pomp(parus,skeleton=map(skel),paramnames=c("r"),statenames=c("N"))
 
 #' Note that we have to inform **pomp** as to which of the variables we've referred to in `skel` is a state variable (`statenames`) and which is a parameter (`paramnames`).
@@ -476,10 +479,10 @@ parus <- pomp(parus,skeleton=map(skel),paramnames=c("r"),statenames=c("N"))
 #' 
 #' With just the skeleton defined, we are in a position to compute the trajectories of the deterministic skeleton at any point in parameter space.
 #' For example, here we compute the trajectory and superimpose it on a plot of one simulation:
-## ----parus-first-traj,results='markup'-----------------------------------
-traj <- trajectory(parus,params=c(N.0=1,r=12),as.data.frame=TRUE)
-plot(N~time,data=sim,type='o')
-lines(N~time,data=traj,type='l',col='red')
+## ----parus-first-traj,results='markup'----------------------------------------
+traj <- trajectory(parus,params=c(N.0=1,r=12),format="d")
+plot(N~year,data=sim,type='o')
+lines(N~year,data=traj,type='l',col='red')
 
 #' 
 #' #### A note on terminology

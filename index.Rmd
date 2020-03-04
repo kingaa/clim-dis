@@ -45,6 +45,20 @@ options(
   )
 ```
 
+<style type="text/css">
+div .nb {
+	background-color: #ffeca3;
+	border-style: solid;
+	border-width: 2;
+	border-color: #00274c;
+	padding: 1em;
+}
+hr {
+	border-width: 3;
+	border-color: #00274c;
+}
+</style>
+
 ----------------------------
 
 ### Instructor
@@ -62,8 +76,14 @@ Email: kingaaictp5@gmail.com
 1. If you wish to use your own computer, install **R** and **RStudio** on it before the first day of the course.
 [Instructions for doing so are here](./prep/preparation.html).
 
-
 ----------------------------
+
+<div class="nb"> 
+**Important Note:**
+Note that the materials here use an old version of **pomp**.
+With version 2, the **pomp** syntax changed substantially so that these codes will no longer run.
+An up-to-date tutorial covering some of the same ground can be found [here](https://kingaa.github.io/sbied/).
+</div>
 
 ### Topics
 

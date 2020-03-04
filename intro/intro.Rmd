@@ -339,22 +339,22 @@ library(ggplot2)
 library(plyr)
 library(reshape2)
 library(pomp)
-stopifnot(packageVersion("pomp")>="1.4.9")
+stopifnot(packageVersion("pomp")>="2.4")
 ```
 
 A pre-built `pomp` object encoding the Ricker model comes included with the package.
-Load it by
+Construct it by executing
 ```{r load-ricker,cache=FALSE,results="hide"}
-pompExample(ricker)
+ricker() -> rick
 ```
-This has the effect of creating a `pomp` object named `ricker` in your workspace.
+This has the effect of creating a `pomp` object named `rick` in your workspace.
 We can plot the data by doing
 ```{r plot-ricker}
-plot(ricker)
+plot(rick)
 ```
 We can simulate by doing
 ```{r sim-ricker1}
-x <- simulate(ricker)
+x <- simulate(rick)
 ```
 What kind of object have we created?
 ```{r}
@@ -365,66 +365,66 @@ Why do we see more time series in the simulated `pomp` object?
 
 We can turn a `pomp` object into a data frame:
 ```{r}
-y <- as.data.frame(ricker)
+y <- as.data.frame(rick)
 head(y)
-head(simulate(ricker,as.data.frame=TRUE))
+head(simulate(rick,format="data.frame"))
 ```
 
 We can also run multiple simulations simultaneously:
 ```{r}
-x <- simulate(ricker,nsim=10)
+x <- simulate(rick,nsim=10)
 class(x)
 sapply(x,class)
-x <- simulate(ricker,nsim=10,as.data.frame=TRUE)
+x <- simulate(rick,nsim=10,format="data.frame")
 head(x)
 str(x)
 ```
 Also,
 ```{r fig.height=8}
-x <- simulate(ricker,nsim=9,as.data.frame=TRUE,include.data=TRUE)
-ggplot(data=x,aes(x=time,y=y,group=sim,color=(sim=="data")))+
+x <- simulate(rick,nsim=9,format="d",include.data=TRUE)
+ggplot(data=x,aes(x=time,y=y,group=.id,color=(.id=="data")))+
   geom_line()+guides(color=FALSE)+
-  facet_wrap(~sim,ncol=2)
+  facet_wrap(~.id,ncol=2)
 ```
 
 We refer to the deterministic map as the "skeleton" of the stochastic map.
 We can compute a trajectory of the the deterministic skeleton using `trajectory`:
 ```{r traj-ricker}
-y <- trajectory(ricker)
+y <- trajectory(rick)
 dim(y)
 dimnames(y)
-plot(time(ricker),y["N",1,],type="l")
+plot(time(rick),y["N",1,],type="l")
 ```
 
-Notice that `ricker` has parameters associated with it:
+Notice that `rick` has parameters associated with it:
 ```{r coef-ricker}
-coef(ricker)
+coef(rick)
 ```
 These are the parameters at which the simulations and deterministic trajectory computations above were done.
 We can run these at different parameters:
 ```{r}
-theta <- coef(ricker)
+theta <- coef(rick)
 theta[c("r","N.0")] <- c(5,3)
-y <- trajectory(ricker,params=theta)
-plot(time(ricker),y["N",1,],type="l")
-x <- simulate(ricker,params=theta)
+y <- trajectory(rick,params=theta)
+plot(time(rick),y["N",1,],type="l")
+x <- simulate(rick,params=theta)
 plot(x,var="y")
 ```
 
-We can also change the parameters stored inside of `ricker`:
+We can also change the parameters stored inside of `rick`:
 ```{r}
-coef(ricker,c("r","N.0","sigma")) <- c(39,0.5,1)
-coef(ricker)
-plot(simulate(ricker),var="y")
+coef(rick,c("r","N.0","sigma")) <- c(39,0.5,1)
+coef(rick)
+plot(simulate(rick),var="y")
 ```
 
 In all of the above, it's possible to work with more than one set of parameters at a time.
 For example:
 ```{r bifdiag}
-p <- parmat(coef(ricker),500)
+p <- parmat(coef(rick),500)
 dim(p); dimnames(p)
 p["r",] <- seq(from=2,to=40,length=500)
-y <- trajectory(ricker,params=p,times=200:1000)
+y <- trajectory(rick,params=p,times=200:1000)
 matplot(p["r",],y["N",,],pch=".",col='black',xlab='r',ylab='N',log='x')
 ```
 
@@ -450,7 +450,7 @@ The `pfilter` function runs a simple particle filter.
 It can be used to evaluate the likelihood at a particular set of parameters.
 One uses the `Np` argument to specify the number of particles to use:
 ```{r pfilter1}
-pf <- pfilter(ricker,Np=1000)
+pf <- pfilter(rick,Np=1000)
 class(pf)
 plot(pf)
 logLik(pf)
@@ -534,9 +534,8 @@ We specify that the time step of the discrete-time process is `delta.t`, here, 1
 
 At this point, we have what we need to simulate the state process:
 ```{r ricker-first-sim}
-sim <- simulate(parus,params=c(N.0=1,e.0=0,r=12,sigma=0.5),
-                as.data.frame=TRUE,states=TRUE)
-plot(N~time,data=sim,type='o')
+sim <- simulate(parus,params=c(N.0=1,e.0=0,r=12,sigma=0.5),format="d")
+plot(N~year,data=sim,type='o')
 ```
 
 #### Adding in the measurement model and parameters
@@ -564,9 +563,9 @@ coef(parus) <- c(N.0=1,e.0=0,r=20,sigma=0.1,phi=200)
 ```
 ```{r ricker-second-sim,results='markup'}
 library(ggplot2)
-sims <- simulate(parus,nsim=3,as.data.frame=TRUE,include.data=TRUE)
-ggplot(data=sims,mapping=aes(x=time,y=pop))+geom_line()+
-  facet_wrap(~sim,ncol=1,scales="free_y")
+sims <- simulate(parus,nsim=3,format="d",include.data=TRUE)
+ggplot(data=sims,mapping=aes(x=year,y=pop))+geom_line()+
+  facet_wrap(~.id,ncol=1,scales="free_y")
 ```
 
 #### Adding in the deterministic skeleton
@@ -589,9 +588,9 @@ The `map` call tells **pomp** that the skeleton is a discrete-time dynamical sys
 With just the skeleton defined, we are in a position to compute the trajectories of the deterministic skeleton at any point in parameter space.
 For example, here we compute the trajectory and superimpose it on a plot of one simulation:
 ```{r parus-first-traj,results='markup'}
-traj <- trajectory(parus,params=c(N.0=1,r=12),as.data.frame=TRUE)
-plot(N~time,data=sim,type='o')
-lines(N~time,data=traj,type='l',col='red')
+traj <- trajectory(parus,params=c(N.0=1,r=12),format="d")
+plot(N~year,data=sim,type='o')
+lines(N~year,data=traj,type='l',col='red')
 ```
 
 #### A note on terminology
