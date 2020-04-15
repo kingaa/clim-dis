@@ -61,9 +61,12 @@ hr {
 
 <div class="nb"> 
 **Important Note:**
-These materials have been updated for use with version `r packageVersion("pomp")`.
+Some of these materials have been updated for use with version `r packageVersion("pomp")`.
 As of version 2, **pomp** syntax has changed substantially.
 These changes [are documented](http://kingaa.github.io/pomp/vignettes/upgrade_guide.html) on the **pomp** website.
+
+Some of the materials have been superseded entirely.
+In these cases, links are provided to the updated material.
 </div>
 
 
