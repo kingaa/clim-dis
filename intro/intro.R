@@ -34,6 +34,27 @@
 #' 
 #' Produced in **R** version `r getRversion()` using **pomp** version `r packageVersion("pomp")`.
 #' 
+#' <style type="text/css">
+#' div .nb {
+#' 	background-color: #ffeca3;
+#' 	border-style: solid;
+#' 	border-width: 2;
+#' 	border-color: #00274c;
+#' 	padding: 1em;
+#' }
+#' hr {
+#' 	border-width: 3;
+#' 	border-color: #00274c;
+#' }
+#' </style>
+#' 
+#' <div class="nb"> 
+#' **Important Note:**
+#' These materials have been updated for use with version `r packageVersion("pomp")`.
+#' As of version 2, **pomp** syntax has changed substantially.
+#' These changes [are documented](http://kingaa.github.io/pomp/vignettes/upgrade_guide.html) on the **pomp** website.
+#' </div>
+#' 
 
 ## ----opts,include=FALSE,cache=FALSE-------------------------------------------
 options(stringsAsFactors=FALSE)
@@ -234,7 +255,7 @@ library(ggplot2)
 library(plyr)
 library(reshape2)
 library(pomp)
-stopifnot(packageVersion("pomp")>="2.4")
+stopifnot(packageVersion("pomp")>="2.8")
 
 #' 
 #' A pre-built `pomp` object encoding the Ricker model comes included with the package.
@@ -414,7 +435,7 @@ stochStep <- Csnippet("
   e = rnorm(0,sigma);
   N = r*N*exp(-N+e);
 ")
-pomp(parus,rprocess=discrete.time.sim(step.fun=stochStep,delta.t=1),
+pomp(parus,rprocess=discrete_time(step.fun=stochStep,delta.t=1),
      paramnames=c("r","sigma"),statenames=c("N","e")) -> parus
 
 #' Note that in the above, we use the `exp` and `rnorm` functions from the [**R** API](http://cran.r-project.org/doc/manuals/r-release/R-exts.html#The-R-API).

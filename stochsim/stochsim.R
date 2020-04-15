@@ -37,6 +37,27 @@
 #' 
 #' Produced with **R** version `r getRversion()` and **pomp** version `r packageVersion("pomp")`.
 #' 
+#' <style type="text/css">
+#' div .nb {
+#' 	background-color: #ffeca3;
+#' 	border-style: solid;
+#' 	border-width: 2;
+#' 	border-color: #00274c;
+#' 	padding: 1em;
+#' }
+#' hr {
+#' 	border-width: 3;
+#' 	border-color: #00274c;
+#' }
+#' </style>
+#' 
+#' <div class="nb"> 
+#' **Important Note:**
+#' These materials have been updated for use with version `r packageVersion("pomp")`.
+#' As of version 2, **pomp** syntax has changed substantially.
+#' These changes [are documented](http://kingaa.github.io/pomp/vignettes/upgrade_guide.html) on the **pomp** website.
+#' </div>
+#' 
 #' --------------------------
 #' 
 
@@ -48,7 +69,7 @@ library(pomp)
 library(ggplot2)
 theme_set(theme_bw())
 options(stringsAsFactors=FALSE)
-stopifnot(packageVersion("pomp")>="1.4.5")
+stopifnot(packageVersion("pomp")>="2.8")
 set.seed(594709947L)
 
 #' 
@@ -311,8 +332,8 @@ sir_init <- Csnippet("
 
 #' We fold these `Csnippets`, with the data, into a `pomp` object thus:
 ## ----rproc1-pomp--------------------------------------------------------------
-pomp(bsflu,time="day",t0=0,rprocess=euler.sim(sir_step,delta.t=1/6),
-     initializer=sir_init,paramnames=c("N","Beta","gamma"),
+pomp(bsflu,time="day",t0=0,rprocess=euler(sir_step,delta.t=1/6),
+     rinit=sir_init,paramnames=c("N","Beta","gamma"),
      statenames=c("S","I","R")) -> sir
 
 #' 
@@ -339,7 +360,7 @@ sir_init <- Csnippet("
   H = 0;
 ")
 
-pomp(sir,rprocess=euler.sim(sir_step,delta.t=1/6),initializer=sir_init,
+pomp(sir,rprocess=euler(sir_step,delta.t=1/6),rinit=sir_init,
      paramnames=c("Beta","gamma","N"),statenames=c("S","I","R","H")) -> sir
 
 #' 
@@ -347,9 +368,9 @@ pomp(sir,rprocess=euler.sim(sir_step,delta.t=1/6),initializer=sir_init,
 #' $$B_t \sim \dist{Binomial}{H(t)-H(t-1),\rho}.$$
 #' But we have a problem, since at time $t$, the variable `H` we've defined will contain $H(t)$, not $H(t)-H(t-1)$.
 #' We can overcome this by telling `pomp` that we want `H` to be set to zero immediately following each observation.
-#' We do this by setting the `zeronames` argument to `pomp`:
+#' We do this by setting the `accumvars` argument to `pomp`:
 ## ----zero1--------------------------------------------------------------------
-pomp(sir,zeronames="H") -> sir
+pomp(sir,accumvars="H") -> sir
 
 #' 
 #' Now, to include the observations in the model, we must write an `rmeasure` component:
@@ -375,9 +396,9 @@ sir <- pomp(sir,rmeasure=rmeas,statenames="H",paramnames="rho")
 #' 
 ## ----sir_sim1-----------------------------------------------------------------
 sims <- simulate(sir,params=c(Beta=1.5,gamma=1,rho=0.9,N=2600),
-                 nsim=20,as.data.frame=TRUE,include.data=TRUE)
+                 nsim=20,format="data.frame",include.data=TRUE)
 
-ggplot(sims,mapping=aes(x=time,y=B,group=sim,color=sim=="data"))+
+ggplot(sims,mapping=aes(x=day,y=B,group=.id,color=.id=="data"))+
   geom_line()+guides(color=FALSE)
 
 #' 

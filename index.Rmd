@@ -59,6 +59,14 @@ hr {
 }
 </style>
 
+<div class="nb"> 
+**Important Note:**
+These materials have been updated for use with version `r packageVersion("pomp")`.
+As of version 2, **pomp** syntax has changed substantially.
+These changes [are documented](http://kingaa.github.io/pomp/vignettes/upgrade_guide.html) on the **pomp** website.
+</div>
+
+
 ----------------------------
 
 ### Instructor
@@ -77,13 +85,6 @@ Email: kingaaictp5@gmail.com
 [Instructions for doing so are here](./prep/preparation.html).
 
 ----------------------------
-
-<div class="nb"> 
-**Important Note:**
-Note that the materials here use an old version of **pomp**.
-With version 2, the **pomp** syntax changed substantially so that these codes will no longer run.
-An up-to-date tutorial covering some of the same ground can be found [here](https://kingaa.github.io/sbied/).
-</div>
 
 ### Topics
 
